@@ -1,1 +1,0 @@
-[Projektsteckbrief – click here to view online (read-only)](https://view.officeapps.live.com/op/view.aspx?src=https%3A%2F%2Fraw.githubusercontent.com%2Fkhaledelsayed9050%2FPortfolio%2Fmain%2FPortfolio%2FProzesse%2520Documents%2520Samples%2FProject%2520Management%2FVorlage_Projektsteckbrief_V1.docx)
