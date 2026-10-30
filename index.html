@@ -422,7 +422,7 @@ button.thumb:hover img{transform:translateY(-4px)}
     </ul>
     <p class="creds-hint" data-i18n="credHint">Click a certificate to verify it.</p>
     <div class="actions">
-      <a class="btn primary" id="cvBtn" href="https://khaledelsayed9050.github.io/Portfolio/Portfolio/CV/Khaled_Elsayed_CV.EN.pdf" target="_blank" rel="noopener">
+      <a class="btn primary" id="cvBtn" href="https://khaledelsayed9050.github.io/Portfolio/Portfolio/CV/Khaled_Elsayed_CV.html#en" target="_blank" rel="noopener">
         <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 1.5h5.5L13 5v9.5H4z"/><path d="M9 1.5V5.5h4M6.5 9h4M6.5 11.5h4"/></svg>
         <span data-i18n="btnCv">View my CV</span></a>
       <a class="btn ghost" href="#samples">
@@ -784,8 +784,8 @@ button.thumb:hover img{transform:translateY(-4px)}
         <a class="btn primary" id="writeBtn" href="mailto:khaled.elsayed9050@gmail.com?subject=Contact%20via%20your%20portfolio" data-i18n="write">Write to me</a>
         <a class="btn ghost" href="https://www.linkedin.com/in/khaled-elsayed-b048ba139/" target="_blank" rel="noopener">LinkedIn</a>
         <button class="btn ghost" type="button" id="copy" data-i18n="copy">Copy email</button>
-        <a class="btn ghost" href="https://khaledelsayed9050.github.io/Portfolio/Portfolio/CV/Khaled_Elsayed_CV.EN.pdf" target="_blank" rel="noopener" data-i18n="cvEn">CV (English)</a>
-        <a class="btn ghost" href="https://khaledelsayed9050.github.io/Portfolio/Portfolio/CV/Khaled_Elsayed_Lebenslauf.DE.pdf" target="_blank" rel="noopener" data-i18n="cvDe">CV (German)</a>
+        <a class="btn ghost" href="https://khaledelsayed9050.github.io/Portfolio/Portfolio/CV/Khaled_Elsayed_CV.html#en" target="_blank" rel="noopener" data-i18n="cvEn">CV (English)</a>
+        <a class="btn ghost" href="https://khaledelsayed9050.github.io/Portfolio/Portfolio/CV/Khaled_Elsayed_CV.html#de" target="_blank" rel="noopener" data-i18n="cvDe">CV (German)</a>
       </div>
     </div>
   </div>
@@ -1148,7 +1148,7 @@ button.thumb:hover img{transform:translateY(-4px)}
   function setLang(l){
     lang=l;document.documentElement.lang=l;
     document.querySelectorAll('[data-i18n]').forEach(function(n){n.innerHTML=t(n.getAttribute('data-i18n'));});
-    $('cvBtn').href=l==='de'?'https://khaledelsayed9050.github.io/Portfolio/Portfolio/CV/Khaled_Elsayed_Lebenslauf.DE.pdf':'https://khaledelsayed9050.github.io/Portfolio/Portfolio/CV/Khaled_Elsayed_CV.EN.pdf';
+    $('cvBtn').href=l==='de'?'https://khaledelsayed9050.github.io/Portfolio/Portfolio/CV/Khaled_Elsayed_CV.html#de':'https://khaledelsayed9050.github.io/Portfolio/Portfolio/CV/Khaled_Elsayed_CV.html#en';
     $('lang-en').setAttribute('aria-pressed',l==='en'?'true':'false');
     $('lang-de').setAttribute('aria-pressed',l==='de'?'true':'false');
     renderSteps();renderCareer();renderDash();renderCase();

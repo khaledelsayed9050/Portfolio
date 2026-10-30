@@ -1,0 +1,505 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Khaled Elsayed Lebenslauf</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@600;700&family=Lato:ital,wght@0,400;0,700;0,900;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: two A4 sheets on a desk, sticky filter bar above; printed CV look, deliberately single (light) theme */
+:root{
+  --navy:#1d3a6e; --navy-2:#34558f; --navy-soft:#a9b7d0; --gold:#d4930f; --gold-soft:#fbefd6;
+  --ink:#1c2433; --muted:#5b6578; --line:#d5dbe6; --chip:#eef2f8; --paper:#ffffff; --desk:#e4e8ef; --hl:#fff6e0;
+  --f-display:"Archivo Narrow","TeX Gyre Heros Cn","Arial Narrow","Roboto Condensed",Arial,sans-serif;
+  --f-body:"Lato","Carlito","Segoe UI",Helvetica,Arial,sans-serif;
+  --f-mono:"JetBrains Mono","DejaVu Sans Mono",ui-monospace,Menlo,Consolas,monospace;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--desk);color:var(--ink);font-family:var(--f-body);font-size:13px;line-height:1.45;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 32px}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--paper)}
+a{color:inherit}
+.l-en{display:none}
+body[data-lang="en"] .l-de{display:none}
+body[data-lang="en"] .l-en{display:revert}
+
+/* toolbar */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;margin:0 calc(-1 * max(16px,env(safe-area-inset-left,0px))) 20px;
+  padding:9px max(16px,env(safe-area-inset-left,0px));background:var(--paper);border-bottom:1px solid var(--line);
+  box-shadow:0 2px 10px rgba(29,58,110,.06)}
+.bar-in{max-width:210mm;margin:0 auto;display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center}
+.seg{display:inline-flex;border:1px solid var(--navy);border-radius:6px;overflow:hidden}
+.seg button{font:700 12px var(--f-body);padding:5px 11px;border:0;background:var(--paper);color:var(--navy);cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--navy);color:#fff}
+.lbl{font:700 10.5px var(--f-body);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;min-width:0}
+.chip{font:700 11.5px var(--f-body);padding:4px 10px;border-radius:999px;border:1px solid var(--line);background:var(--chip);color:var(--navy);cursor:pointer;display:inline-flex;gap:6px;align-items:baseline}
+.chip .n{font:500 10.5px var(--f-mono);color:var(--muted)}
+.chip[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:#fff}
+.chip[aria-pressed="true"] .n{color:var(--gold-soft)}
+.chip:hover{border-color:var(--navy-2)}
+button:focus-visible,a:focus-visible,.str:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.pdf-dl{margin-left:auto;font:700 12px var(--f-body);color:var(--navy);text-decoration:none;border:1px solid var(--gold);background:var(--gold-soft);padding:5px 11px;border-radius:6px;white-space:nowrap}
+.pdf-dl:hover{background:var(--gold);color:#fff}
+.status{font-size:12px;color:var(--muted);flex-basis:100%}
+.status b{color:var(--navy)}
+.status[hidden]{display:none}
+
+/* sheets */
+.sheet{max-width:210mm;margin:0 auto 22px;background:var(--paper);padding:13mm 14mm 10mm;box-shadow:0 6px 24px rgba(29,58,110,.12);
+  display:flex;flex-direction:column;gap:14px}
+.foot{margin-top:auto;padding-top:8px;border-top:1px solid var(--line);display:flex;justify-content:space-between;font:400 11px var(--f-mono);color:var(--muted)}
+
+/* header */
+.head{display:grid;grid-template-columns:1fr auto auto;gap:18px;align-items:start}
+.head > div{min-width:0}
+h1{font:700 40px/1 var(--f-display);color:var(--navy);margin:0 0 6px;letter-spacing:-.01em}
+.role{font-weight:700;font-size:15px;color:var(--navy);margin:0 0 10px}
+.role i{font-style:normal;color:var(--gold);margin:0 7px}
+.meta{color:var(--muted);font-size:12px;display:flex;flex-wrap:wrap;gap:2px 16px}
+.meta b{color:var(--ink)}
+.meta a{text-decoration:none}
+.port{margin-top:12px;font-weight:700;font-size:13px}
+.port a{color:var(--navy);text-decoration:underline;text-decoration-color:var(--gold);text-underline-offset:3px}
+.port .arr{color:var(--gold)}
+.qr{display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none}
+.qr-box{width:92px;height:92px;display:block;image-rendering:pixelated}
+.qr span{font:900 9px var(--f-body);letter-spacing:.08em;color:var(--navy)}
+.photo{width:118px;height:136px;object-fit:cover;object-position:center 20%;border-bottom:3px solid var(--gold);display:block}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.stat{border:1px solid var(--line);border-radius:6px;padding:10px 12px 12px;display:flex;flex-direction:column;gap:4px}
+.stat .big{font:700 26px/1 var(--f-display);color:var(--navy)}
+.stat .big sup{color:var(--gold);font-size:14px}
+.stat .t{font-size:11.5px;color:var(--muted);min-height:2.8em}
+.segs{display:flex;gap:3px;margin-top:auto}
+.segs i{flex:1;height:4px;border-radius:2px;background:var(--navy)}
+.segs i.s{background:var(--navy-soft)} .segs i.g{background:var(--gold)}
+a.stat{text-decoration:none;color:inherit;cursor:pointer;transition:border-color .15s,box-shadow .15s}
+a.stat:hover{border-color:var(--navy-2);box-shadow:0 2px 8px rgba(29,58,110,.12)}
+a.stat .go{font-size:10.5px;font-weight:700;color:var(--navy-2);opacity:0;transition:opacity .15s}
+a.stat:hover .go,a.stat:focus-visible .go{opacity:1}
+
+/* section titles */
+h2{font:700 12.5px var(--f-body);letter-spacing:.16em;text-transform:uppercase;color:var(--navy);margin:0 0 8px;display:flex;align-items:center;gap:12px}
+h2::after{content:"";flex:1;height:1px;background:var(--line)}
+h2 .hint{font-size:10px;letter-spacing:0;text-transform:none;font-weight:400;color:var(--muted)}
+.prof{margin:0}
+
+/* strengths */
+.strs{display:grid;grid-template-columns:repeat(3,1fr);gap:12px 18px}
+.str{border:0;border-left:2px solid var(--navy-soft);background:none;padding:2px 0 2px 12px;text-align:left;font:inherit;color:inherit;cursor:pointer;border-radius:0}
+.str b{display:block;color:var(--navy);font-size:12.5px;margin-bottom:2px}
+.str span{font-size:12px;color:var(--muted)}
+.str:hover{border-left-color:var(--gold)}
+.str[aria-pressed="true"]{border-left-color:var(--gold);background:var(--hl)}
+
+/* timeline */
+.tl-wrap{overflow-x:auto}
+.tl{min-width:640px;display:grid;grid-template-columns:92px 1fr;row-gap:8px;font-size:11px}
+.tl .rl{font:700 10px var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);align-self:center}
+.track{position:relative;height:20px;background:repeating-linear-gradient(90deg,transparent 0 calc(17.39% - 1px),var(--line) calc(17.39% - 1px) 17.39%);background-position:4.35% 0}
+.pos{position:absolute;top:0;height:20px;background:var(--navy-2);color:#fff;font-weight:700;font-size:10.5px;padding:0 6px;display:flex;align-items:center;white-space:nowrap;overflow:hidden;border-radius:2px}
+.pos.dk{background:var(--navy)}
+a.pos{text-decoration:none;cursor:pointer;transition:background .15s,transform .15s}
+a.pos:hover{background:var(--gold);transform:translateY(-1px)}
+a.cred{text-decoration:none;color:inherit;cursor:pointer}
+a.cred:hover{color:var(--navy)}
+a.cred:hover::before{background:var(--navy)}
+.flash{animation:flash 1.8s ease-out}
+@keyframes flash{0%,35%{background:var(--hl);box-shadow:0 0 0 6px var(--hl)}100%{background:transparent;box-shadow:0 0 0 6px transparent}}
+@media (prefers-reduced-motion:reduce){.flash{animation:none;outline:2px solid var(--gold)}}
+.cred{position:absolute;z-index:1;top:3px;display:flex;align-items:center;gap:4px;font-weight:700;font-size:9.5px;white-space:nowrap;transform:translateX(-5px)}
+.cred::before{content:"";width:9px;height:9px;background:var(--gold);transform:rotate(45deg);flex:none}
+.cred.end{transform:none;left:auto!important;right:0}
+.years{position:relative;height:14px;font:400 10.5px var(--f-mono);color:var(--muted)}
+.years span{position:absolute;transform:translateX(-50%)}
+
+/* jobs */
+.job{display:flex;flex-direction:column;gap:4px}
+.job + .job{margin-top:8px}
+.jh{display:flex;justify-content:space-between;gap:12px;align-items:baseline;flex-wrap:wrap}
+.jh h3{margin:0;font-size:14px;color:var(--ink)}
+.date{font:500 11.5px var(--f-mono);background:var(--chip);color:var(--navy);padding:1px 7px;border-radius:3px;white-space:nowrap}
+.org{font-style:italic;color:var(--muted);font-size:12px}
+ul.b{margin:4px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:3px}
+ul.b li{position:relative;padding:1px 6px 1px 14px;border-radius:3px;transition:opacity .2s,background .2s}
+ul.b li::before{content:"";position:absolute;left:3px;top:.62em;width:5px;height:5px;background:var(--navy-2);border-radius:1px}
+ul.inline{flex-direction:row;flex-wrap:wrap;gap:3px 26px}
+body.filtering ul.b li{opacity:.32}
+body.filtering ul.b li.hit{opacity:1;background:var(--hl);box-shadow:inset 3px 0 0 var(--gold)}
+body.filtering ul.b li.hit::before{background:var(--gold)}
+@media (prefers-reduced-motion:reduce){ul.b li{transition:none}}
+
+/* page 2 lower */
+.two{display:grid;grid-template-columns:1.25fr 1fr;gap:24px}
+.two > section{min-width:0}
+.edu{display:flex;flex-direction:column;gap:6px}
+.edu .row{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.edu .row > div{min-width:0}
+.edu b{font-size:12.5px}
+.edu a b{text-decoration:underline dashed var(--navy-2);text-underline-offset:3px}
+.edu a{text-decoration:none}
+.edu a .arr{color:var(--gold);font-weight:700}
+.edu small{display:block;color:var(--muted);font-size:11px}
+.yr{font:500 11px var(--f-mono);background:var(--chip);color:var(--navy);padding:1px 7px;border-radius:3px;white-space:nowrap}
+.yr.prog{background:var(--gold-soft);color:#8a5a00}
+.langs{display:grid;grid-template-columns:auto 1fr auto;gap:7px 12px;align-items:center}
+.langs b{font-size:12.5px}
+.lv{display:grid;grid-template-columns:repeat(6,1fr);gap:3px}
+.lv i{height:8px;border-radius:1px;background:var(--chip)}
+.lv i.on{background:var(--navy)}
+.langs .c{font:500 11px var(--f-mono);color:var(--navy);text-align:right}
+.scale{grid-column:2;display:grid;grid-template-columns:repeat(6,1fr);font:400 9.5px var(--f-mono);color:var(--muted);text-align:center}
+.lic{margin-top:10px;padding-top:8px;border-top:1px solid var(--line);font-weight:700;font-size:12.5px}
+.kk{display:grid;grid-template-columns:150px 1fr;gap:7px 16px}
+.kk dt{font-weight:700;color:var(--navy)}
+.kk dd{margin:0;min-width:0}
+.tools{display:flex;flex-wrap:wrap;gap:4px}
+.tools span{font:400 11px var(--f-mono);border:1px solid var(--line);padding:1px 7px;border-radius:3px}
+
+@media (max-width:720px){
+  .sheet{padding:20px 16px 14px}
+  .head{grid-template-columns:1fr auto}
+  .head .qr{display:none}
+  h1{font-size:32px}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .strs{grid-template-columns:1fr 1fr}
+  .two{grid-template-columns:1fr}
+  .kk{grid-template-columns:1fr;gap:2px}
+  .kk dd{margin-bottom:8px}
+}
+@media (max-width:460px){
+  .head{grid-template-columns:1fr}
+  .photo{width:96px;height:110px}
+  .strs{grid-template-columns:1fr}
+}
+@media print{
+  @page{size:A4;margin:0}
+  body{background:#fff;padding:0}
+  body::before,.bar{display:none}
+  .sheet{box-shadow:none;margin:0;max-width:none;width:210mm;height:297mm;overflow:hidden;padding:10mm 13mm 7mm;gap:8px;break-after:page;font-size:11px;line-height:1.33}
+  h2{margin-bottom:5px}
+  .stat{padding:7px 10px 9px}
+  .stat .t{min-height:0}
+  .stat .big{font-size:22px}
+  .strs{gap:8px 16px}
+  .tl{row-gap:5px}
+  .photo{height:124px;width:108px}
+  .sheet .t,.str span,.org,.meta{font-size:10.6px}
+  ul.b{gap:1px}
+  .sheet:last-of-type{break-after:auto}
+  .tl{min-width:0}
+  ul.b li{opacity:1!important}
+  a.stat .go{display:none}
+  .hint.web{display:none!important}
+  .flash{animation:none!important;outline:0!important}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+
+</head>
+<body>
+<div class="bar" role="toolbar" aria-label="Sprache und Schwerpunkt">
+  <div class="bar-in">
+    <div class="seg" role="group" aria-label="Sprache / Language">
+      <button type="button" id="lang-de" data-lang="de" aria-pressed="true">Deutsch</button>
+      <button type="button" id="lang-en" data-lang="en" aria-pressed="false">English</button>
+    </div>
+    <span class="lbl"><span class="l-de">Schwerpunkt</span><span class="l-en">Focus</span></span>
+    <div class="chips" id="chips">
+      <button type="button" class="chip" data-f="all" aria-pressed="true"><span class="l-de">Alle</span><span class="l-en">All</span></button>
+      <button type="button" class="chip" data-f="pm" aria-pressed="false"><span class="l-de">Prozessmanagement</span><span class="l-en">Process management</span><span class="n"></span></button>
+      <button type="button" class="chip" data-f="ps" aria-pressed="false"><span class="l-de">Projektsteuerung</span><span class="l-en">Project control</span><span class="n"></span></button>
+      <button type="button" class="chip" data-f="bi" aria-pressed="false"><span>BI &amp; KPIs</span><span class="n"></span></button>
+      <button type="button" class="chip" data-f="risk" aria-pressed="false"><span class="l-de">Risikomanagement</span><span class="l-en">Risk management</span><span class="n"></span></button>
+      <button type="button" class="chip" data-f="auto" aria-pressed="false"><span class="l-de">Automatisierung</span><span class="l-en">Automation</span><span class="n"></span></button>
+      <button type="button" class="chip" data-f="qa" aria-pressed="false"><span class="l-de">Qualität &amp; ASPICE</span><span class="l-en">Quality &amp; ASPICE</span><span class="n"></span></button>
+      <button type="button" class="chip" data-f="agile" aria-pressed="false"><span class="l-de">Agil</span><span class="l-en">Agile</span><span class="n"></span></button>
+      <button type="button" class="chip" data-f="sc" aria-pressed="false"><span class="l-de">Stakeholder &amp; Change</span><span class="l-en">Stakeholders &amp; change</span><span class="n"></span></button>
+    </div>
+    <a class="pdf-dl l-de" href="https://khaledelsayed9050.github.io/Portfolio/Portfolio/CV/Khaled_Elsayed_Lebenslauf.DE.pdf" target="_blank" rel="noopener">PDF herunterladen ↓</a>
+    <a class="pdf-dl l-en" href="https://khaledelsayed9050.github.io/Portfolio/Portfolio/CV/Khaled_Elsayed_CV.EN.pdf" target="_blank" rel="noopener">Download PDF ↓</a>
+    <div class="status" id="status" hidden></div>
+  </div>
+</div>
+
+<!-- ============ PAGE 1 ============ -->
+<article class="sheet">
+  <header class="head">
+    <div>
+      <h1>Khaled Elsayed</h1>
+      <p class="role"><span class="l-de">Prozess- und Projektmanager</span><span class="l-en">Process &amp; Project Manager</span><i>|</i>BI Analyst<i>|</i><span class="l-de">IT-Projektmanager</span><span class="l-en">IT Project Manager</span></p>
+      <div class="meta">
+        <span><span class="l-de">Feuerweg 19, 90443 Nürnberg</span><span class="l-en">Feuerweg 19, 90443 Nuremberg, Germany</span></span>
+        <b>+49 178 7985231</b>
+        <a href="mailto:khaled.elsayed9050@gmail.com"><b>khaled.elsayed9050@gmail.com</b></a>
+      </div>
+      <div class="meta"><span class="l-de">Geboren am 02.08.1993 · Ägyptisch · Verheiratet</span><span class="l-en">Born 2 Aug 1993 · Egyptian · Married</span></div>
+      <p class="port"><span class="l-de">Portfolio mit Arbeitsproben &amp; Zertifikaten:</span><span class="l-en">Portfolio with work samples &amp; certificates:</span>
+        <a href="https://khaledelsayed9050.github.io/Portfolio/" target="_blank" rel="noopener">khaledelsayed9050.github.io/Portfolio</a> <span class="arr">↗</span></p>
+    </div>
+    <a class="qr" href="https://khaledelsayed9050.github.io/Portfolio/" target="_blank" rel="noopener" aria-label="Portfolio QR-Code">
+      <img class="qr-box" alt="QR-Code Portfolio" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAdkAAAHZAQAAAADiPHyvAAADqElEQVR42u2dS27qQBREq0IkZwY7MDsxO7PZmdkJ7CDMQMKuN+i+/pAYeB+9SapHJPEx0rWs6q77CTBZa0lN+lgJVF43FDqilqTP6eXNG/5iGTb8k+G35T+sxjcPOLGhLlhrTwDAiTuAOnMbQBWXt462YcOL8JUkmX9Rd/zAmTuoI7nFgej4MUX2JLlxtA0bfhXeh3YN20esdAEA8N0BM2z4/8Kl1OPKDQ6E+IFTKGApUjcHzLDh1+Ai6Vle4kf4JGdWaoGOax04XDEaJo62YcPfwh3zek9WB1DoxB345b58B3CIy3eOtmHD3y/N1hGDuf91jV5jWvb0DRv+9/BofnTcAKh7FPoc9Yxh7pPokr7JQmfY8EOhS6nprHhHjDnrPk5r4T6Gvg15bkfbsOEFrbpyi0pImbFsdQAArtziQF251hG1QtaoC85Trdo52oYN/1O4FInVeKIDAKafK0018UyyET9S0Yijbdjwd7CkC06U8qEsyxg51IpkKczuYy60+kQlR9uw4cdaxUInblF3UUY12JA3FJJIpcR0AyC9d0++eeNoGzb8G/e9zz93LHXE/g2FpDYMlANZ6ExSykJHkukM6GgbNrzgkxSp4GOVhK7HlWQtcjRMCkkNdMNae6oHfCgzbBiPPP31rNAKOUcNRj3VaprVbsP1b1ND2uXufu93YuhoGzb8zeqXhS5tDpvhzRvsfsUuUSQrNZB0Yi11bp0xbPih+xguCDpuUKrR6JOk09nc7B98kp2jbdjwwror+NCXsQWSLijH2scm9pEuCTFs+M/hCxb8+pAx3QCUakLf1KcGtbFjJk500WzjV9Kw4eV5BpUaYBX6duUGlZgU8BDdnXveK6Cjbdjw0vZR4T6ux6lXub6qjKE8k+7OXMlfWasMG35wKCvVYlqe/zkOrhrbz5j3iJIu80NZ+/xb0ku69aMybPj5KsYhc6Uahm+SDmXtTApnhIXOsOFXO6+zlY/R6kjTVMN95L3QOdqGDc/yz5O1SQYicGatoXxRN1xZiYwEWVzxx4WTflSGfyrcvwDPZhQjlYQAB+aO0CqEDghPP3WRHlz7aNjws+T1bRzGPxnc006S15NDmd1Hw4ZffqvUz23J7Ecev+SfHx/K+ueFk35UhvEjG9J+v9Q+JwRu0QqKSF7fFkaMONqGDT+cUTw7e5VqYwZ/PZliTJaS2zwNG36+1jqi7mOEHMPjHz6soiQkeSAPto/NK/8Iyo/K8E+Dmzc8G/TxC5xL5Gi5Qp7lAAAAAElFTkSuQmCC">
+      <span><span class="l-de">SCAN: PORTFOLIO</span><span class="l-en">SCAN: PORTFOLIO</span></span>
+    </a>
+    <img class="photo" alt="Khaled Elsayed" src="data:image/jpeg;base64,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">
+  </header>
+
+  <div class="stats">
+    <a class="stat" href="#sec-exp" data-go><div class="big">5<sup>+</sup></div><div class="t"><span class="l-de">Jahre Erfahrung in Projekt- &amp; Prozessrollen</span><span class="l-en">years in project &amp; process roles</span></div><div class="segs"><i></i><i></i><i></i><i></i><i></i><i class="s"></i></div><span class="go"><span class="l-de">Zur Berufserfahrung ↓</span><span class="l-en">See experience ↓</span></span></a>
+    <a class="stat" href="#sec-timeline" data-go><div class="big">4</div><div class="t"><span class="l-de">Arbeitgeber in Deutschland &amp; Ägypten</span><span class="l-en">employers in Germany &amp; Egypt</span></div><div class="segs"><i></i><i></i><i></i><i></i></div><span class="go"><span class="l-de">Zum Karriereverlauf ↓</span><span class="l-en">See timeline ↓</span></span></a>
+    <a class="stat" href="#sec-edu" data-go><div class="big">6</div><div class="t"><span class="l-de">Zertifikate: 4 abgeschlossen, 2 in Bearbeitung</span><span class="l-en">certificates: 4 earned, 2 in progress</span></div><div class="segs"><i></i><i></i><i></i><i></i><i class="g"></i><i class="g"></i></div><span class="go"><span class="l-de">Zu den Zertifikaten ↓</span><span class="l-en">See certificates ↓</span></span></a>
+    <a class="stat" href="#sec-lang" data-go><div class="big">5</div><div class="t"><span class="l-de">Sprachen, Deutsch auf Niveau C2</span><span class="l-en">languages, German at C2 level</span></div><div class="segs"><i></i><i></i><i></i><i></i><i></i></div><span class="go"><span class="l-de">Zu den Sprachen ↓</span><span class="l-en">See languages ↓</span></span></a>
+  </div>
+
+  <section>
+    <h2><span class="l-de">Profil</span><span class="l-en">Profile</span></h2>
+    <p class="prof l-de">Erfahrener <b>Projekt- und Prozessmanager</b> mit 5+ Jahren Berufserfahrung in der Analyse und Optimierung von Geschäftsprozessen sowie in der Steuerung von Projekten von der Planung bis zur Umsetzung. Entwickelt gemeinsam mit Fachbereichen effiziente Prozesse, bringt Tools und Automatisierung gezielt in Abläufe ein und begleitet Veränderungen. Fundierte Praxis in Prozessdokumentation und -analyse, Risikomanagement, Projektkoordination, Stakeholder-Management, Prozess-KPIs (Soll-Ist-Vergleiche) und <b>KPI-Reporting mit Power BI</b>. Technischer Hintergrund als Maschinenbauingenieur (B.Sc.) mit Erfahrung in Industrie- und IT-Projekten; <b>Six Sigma Green Belt</b>, Google Project Management Diploma. Analytisch, strukturiert, eigenverantwortlich und kommunikationsstark.</p>
+    <p class="prof l-en">Experienced <b>project and process manager</b> with 5+ years of professional experience in analysing and optimising business processes and in steering projects from planning to delivery. Works with business units to design efficient processes, brings tools and automation into workflows where they add value, and guides teams through change. Solid hands-on practice in process documentation and analysis, risk management, project coordination, stakeholder management, process KPIs (target-vs-actual comparisons) and <b>KPI reporting with Power BI</b>. Technical background as a mechanical engineer (B.Sc.) with experience in industrial and IT projects; <b>Six Sigma Green Belt</b>, Google Project Management Diploma. Analytical, structured, self-directed and a strong communicator.</p>
+  </section>
+
+  <section>
+    <h2><span class="l-de">Stärken</span><span class="l-en">Key strengths</span> <span class="hint web l-de">zum Hervorheben anklicken</span><span class="hint web l-en">click to highlight</span></h2>
+    <div class="strs">
+      <button type="button" class="str" data-f="pm" aria-pressed="false"><b>Process Excellence</b><span class="l-de">Prozessanalyse, -optimierung und -modellierung (Visio, draw.io, Jira)</span><span class="l-en">Process analysis, optimisation and modelling (Visio, draw.io, Jira)</span></button>
+      <button type="button" class="str" data-f="ps" aria-pressed="false"><b><span class="l-de">Projektmanagement</span><span class="l-en">Project management</span></b><span class="l-de">Planung bis Umsetzung, Termine, Ressourcen, Budget, Machbarkeitsanalyse</span><span class="l-en">Planning to delivery, schedules, resources, budget, feasibility</span></button>
+      <button type="button" class="str" data-f="auto" aria-pressed="false"><b><span class="l-de">Digitalisierung &amp; Automatisierung</span><span class="l-en">Digitalisation &amp; automation</span></b><span class="l-de">Polarion-Jira-Automatisierung, Tool-Optimierung, KI, KPIs</span><span class="l-en">Polarion-to-Jira automation, tool optimisation, AI, KPIs</span></button>
+      <button type="button" class="str" data-f="bi" aria-pressed="false"><b>Business Analysis</b><span class="l-de">Budgetplanung, Kostenkontrolle, Soll-Ist-Vergleiche, KPIs, Power-BI-Dashboards</span><span class="l-en">Budget planning, cost control, target-vs-actual, KPIs, Power BI dashboards</span></button>
+      <button type="button" class="str" data-f="risk" aria-pressed="false"><b><span class="l-de">Stakeholder- &amp; Risikomanagement</span><span class="l-en">Stakeholder &amp; risk management</span></b><span class="l-de">Fachbereiche, IT-Management, Risiko-Workshops, Risikoanalyse</span><span class="l-en">Business units, IT management, risk workshops, risk analysis</span></button>
+      <button type="button" class="str" data-f="sc" aria-pressed="false"><b><span class="l-de">Change &amp; Schulung</span><span class="l-en">Change &amp; training</span></b><span class="l-de">Change-Management, Schulung und Einarbeitung von Kolleg:innen</span><span class="l-en">Change management, training and onboarding of colleagues</span></button>
+    </div>
+  </section>
+
+  <section id="sec-timeline">
+    <h2><span class="l-de">Karriereverlauf</span><span class="l-en">Career timeline</span> <span class="hint l-de">zum Springen anklicken</span><span class="hint l-en">click to jump</span></h2>
+    <div class="tl-wrap">
+      <div class="tl">
+        <div class="rl"><span class="l-de">Positionen</span><span class="l-en">Roles</span></div>
+        <div class="track">
+          <a class="pos" href="#job-aict" data-go title="10/2017 – 10/2021" style="left:19.57%;width:35.5%">AICT · <span class="l-de">&nbsp;Ingenieur / SPS</span><span class="l-en">&nbsp;Engineer / PLC</span></a>
+          <a class="pos" href="#job-zf" data-go title="ZF Friedrichshafen · 03/2022 – 10/2022" style="left:58%;width:5.6%">ZF</a>
+          <a class="pos dk" href="#job-4aces" data-go title="4ACES-Tech · 11/2022 – 12/2024" style="left:63.77%;width:18.7%">4ACES</a>
+          <a class="pos dk" href="#job-esol" data-go title="e.Solutions · 01/2025 – 08/2026" style="left:82.6%;width:14.5%">e.Solutions</a>
+        </div>
+        <div class="rl"><span class="l-de">Abschlüsse</span><span class="l-en">Credentials</span></div>
+        <div class="track" style="background:none">
+          <a class="cred" href="#edu-bsc" data-go style="left:4.35%">B.Sc. 2016</a>
+          <a class="cred" href="#edu-gpm" data-go style="left:56.5%">Google PM 2022</a>
+          <a class="cred" href="#edu-ssgb" data-go style="left:71.8%">Six Sigma GB 2024</a>
+          <a class="cred end" href="#edu-agile" data-go>Agile PM 2026</a>
+        </div>
+        <div></div>
+        <div class="years"><span style="left:4.35%">2016</span><span style="left:21.74%">2018</span><span style="left:39.13%">2020</span><span style="left:56.52%">2022</span><span style="left:73.91%">2024</span><span style="left:91.3%">2026</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="sec-exp">
+    <h2><span class="l-de">Berufserfahrung</span><span class="l-en">Professional experience</span></h2>
+    <div class="job" id="job-esol">
+      <div class="jh"><h3><span class="l-de">Projektmanager / Prozessmanager</span><span class="l-en">Project Manager / Process Manager</span></h3><span class="date">01/2025 – 08/2026</span></div>
+      <div class="org"><span class="l-de">e.Solutions / Alten Consulting, Nürnberg</span><span class="l-en">e.Solutions / Alten Consulting, Nuremberg</span></div>
+      <ul class="b">
+        <li data-t="ps sc"><span class="l-de">Planung, Koordination und Nachverfolgung von 15+ IT- und Softwareentwicklungsprojekten für das HMI-Softwareprodukt mit mehr als 25 Stakeholdern unter Berücksichtigung von Qualität, Terminen und Projektzielen</span><span class="l-en">Planned, coordinated and tracked 15+ IT and software development projects for the HMI software product with 25+ stakeholders, against quality, schedule and project goals</span></li>
+        <li data-t="pm auto"><span class="l-de">Analyse, Weiterentwicklung und Optimierung von Entwicklungs- und Projektprozessen sowie der unterstützenden Werkzeuge (Jira, Confluence, Polarion, SonarQube, Power BI, Bitbucket)</span><span class="l-en">Analysed, developed and optimised development and project processes and their supporting tools (Jira, Confluence, Polarion, SonarQube, Power BI, Bitbucket)</span></li>
+        <li data-t="pm auto"><span class="l-de">Konzeption, Digitalisierung und Modellierung von 10+ strategischen Prozessen und Workflows in Jira/Confluence sowie Standardisierung und Visualisierung der Abläufe mit Visio und draw.io, wodurch die Lieferzeit um 20 % verkürzt wurde</span><span class="l-en">Designed, digitised and modelled 10+ strategic processes and workflows in Jira/Confluence and standardised and visualised them in Visio and draw.io, cutting delivery time by 20%</span></li>
+        <li data-t="risk pm"><span class="l-de">Durchführung von 6 Risikomanagementprozessen wie Risikolisten-Analyse, Risiko-Workshops und Erstellung des Risikomanagementplans sowie Beratung von Product Owners zu Maßnahmen der Prozessoptimierung, wodurch die Produktkosten um 10 % gesunken sind</span><span class="l-en">Ran 6 risk management processes including risk register analysis, risk workshops and the risk management plan, and advised Product Owners on process improvements, lowering product costs by 10%</span></li>
+        <li data-t="auto"><span class="l-de">Automatisierung der Übernahme von User Stories aus Polarion nach Jira sowie Automatisierung von Geschäftsprozessen</span><span class="l-en">Automated the transfer of user stories from Polarion to Jira and automated further business processes</span></li>
+        <li data-t="sc"><span class="l-de">Einarbeitung und Schulung neuer Kolleginnen und Kollegen in bestehenden Prozessen und Tools</span><span class="l-en">Onboarded and trained new colleagues on existing processes and tools</span></li>
+        <li data-t="sc pm auto"><span class="l-de">Durchführung von 10 Change- und Problem-Management-Aktivitäten sowie Koordination nachhaltiger Verbesserungsmaßnahmen, Automatisierung und Standardisierung, wodurch der Release-Management-Prozess um 30 % beschleunigt wurde</span><span class="l-en">Carried out 10 change and problem management activities and coordinated lasting improvements, automation and standardisation, speeding up the release management process by 30%</span></li>
+        <li data-t="ps bi"><span class="l-de">Erstellung und Pflege von Terminplänen, Projektplänen, Statusübersichten, KPIs und Management-Reportings/Dashboards mit Jira und Power BI</span><span class="l-en">Built and maintained schedules, project plans, status overviews, KPIs and management reports/dashboards in Jira and Power BI</span></li>
+        <li data-t="ps"><span class="l-de">Digitalisierung, Strukturierung und Nachverfolgung von Anforderungen, Arbeitspaketen, Abhängigkeiten, Änderungen und Projektaktivitäten mit DevOps und Product Owners für 25+ Teams</span><span class="l-en">Digitised, structured and tracked requirements, work packages, dependencies, changes and project activities with DevOps and Product Owners for 25+ teams</span></li>
+        <li data-t="ps sc"><span class="l-de">Koordination und Abstimmung von Aufgaben zwischen 25+ Entwicklungs-, Test-, Qualitäts- und weiteren Projektteams</span><span class="l-en">Coordinated and aligned tasks across 25+ development, test, quality and other project teams</span></li>
+        <li data-t="sc risk"><span class="l-de">Transparente Kommunikation zu Prozessmanagement, Projektkoordination, Projektfortschritt, Risiken, Änderungen, offenen Punkten und Entscheidungsbedarfen an 30+ Stakeholder</span><span class="l-en">Communicated process status, project coordination, progress, risks, changes, open points and pending decisions clearly to 30+ stakeholders</span></li>
+        <li data-t="qa sc"><span class="l-de">Verantwortlich für Anforderungsmanagement, Configuration Management (SUP.8) und Change Management sowie für Nachvollziehbarkeit, Konsistenz und Qualität von Entwicklungsartefakten</span><span class="l-en">Owned requirements management, configuration management (SUP.8) and change management, ensuring traceability, consistency and quality of development artefacts</span></li>
+        <li data-t="qa"><span class="l-de">Konzeption und Anpassung von Quality Gates und Qualitätsprofilen in SonarQube sowie Prozessdokumentation</span><span class="l-en">Designed and tuned quality gates and quality profiles in SonarQube and documented the processes</span></li>
+        <li data-t="agile"><span class="l-de">Unterstützung und Durchführung von Scrum-Events sowie Anwendung agiler Methoden wie Scrum, Kanban und SAFe</span><span class="l-en">Supported and facilitated Scrum events; applied agile methods including Scrum, Kanban and SAFe</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <footer class="foot"><span>Khaled Elsayed · <span class="l-de">Lebenslauf</span><span class="l-en">Curriculum vitae</span></span><span><span class="l-de">Seite</span><span class="l-en">Page</span> 1 / 2</span></footer>
+</article>
+
+<!-- ============ PAGE 2 ============ -->
+<article class="sheet">
+  <section>
+    <h2><span class="l-de">Berufserfahrung (Fortsetzung)</span><span class="l-en">Professional experience (continued)</span></h2>
+
+    <div class="job" id="job-4aces">
+      <div class="jh"><h3><span class="l-de">Technology Consultant / Projektmanager</span><span class="l-en">Technology Consultant / Project Manager</span></h3><span class="date">11/2022 – 12/2024</span></div>
+      <div class="org">4ACES-Tech GmbH, Wolfsburg</div>
+      <ul class="b">
+        <li data-t="ps pm"><span class="l-de">Leitung und Koordination von 10+ internationalen Software- und Automotive-Projekten für Volkswagen mit der Optimierung von 25+ Prozessen</span><span class="l-en">Led and coordinated 10+ international software and automotive projects for Volkswagen, optimising 25+ processes</span></li>
+        <li data-t="ps"><span class="l-de">Durchführung der Projektplanung und -steuerung einschließlich Termin-, Ressourcen-, Budget- und Aufgabenplanung für 10+ Projekte</span><span class="l-en">Ran project planning and control, including schedule, resource, budget and task planning, for 10+ projects</span></li>
+        <li data-t="pm ps"><span class="l-de">Strukturierung und Nachverfolgung von Projektaktivitäten, Arbeitspaketen, Konzepten und Modellierungen, wodurch 25+ Prozesse operativ verbessert wurden</span><span class="l-en">Structured and tracked project activities, work packages, concepts and models, improving 25+ processes in operation</span></li>
+        <li data-t="risk"><span class="l-de">Analyse von Anforderungen, Risiken und Abhängigkeiten sowie Ableitung geeigneter Maßnahmen</span><span class="l-en">Analysed requirements, risks and dependencies and derived suitable measures</span></li>
+        <li data-t="pm"><span class="l-de">Erstellung und Pflege von Strategie-, Prozess- und Projektdokumentationen für 30+ Teams in 10+ Projekten</span><span class="l-en">Wrote and maintained strategy, process and project documentation for 30+ teams across 10+ projects</span></li>
+        <li data-t="sc"><span class="l-de">Koordination der Zusammenarbeit zwischen Fachbereichen, Projektmanagement und technischen Entwicklungsteams</span><span class="l-en">Coordinated collaboration between business units, project management and engineering teams</span></li>
+        <li data-t="qa pm"><span class="l-de">Durchführung von Qualitätsmanagement- und Prozessverbesserungsaktivitäten sowie Vorbereitung und Begleitung von GAP-Analysen und Probe-Assessments</span><span class="l-en">Ran quality management and process improvement activities; prepared and supported gap analyses and mock assessments</span></li>
+        <li data-t="agile ps"><span class="l-de">Anwendung agiler Methoden und Projektmanagement-Tools wie Jira, Codebeamer, MS Project, SharePoint und Cplace</span><span class="l-en">Applied agile methods and PM tools such as Jira, Codebeamer, MS Project, SharePoint and Cplace</span></li>
+        <li data-t="ps risk"><span class="l-de">Ressourcenplanung, Risikoanalyse, Machbarkeitsanalyse sowie Budget- und Terminmanagement für 10+ internationale Projekte, wodurch die Lieferzeit um 18 % verkürzt wurde</span><span class="l-en">Resource planning, risk analysis, feasibility analysis and budget and schedule management for 10+ international projects, cutting delivery time by 18%</span></li>
+        <li data-t="bi ps"><span class="l-de">Führung und Optimierung von Budgetplanung, Kostenkontrolle und Soll-Ist-Vergleichen im Rahmen der Projektsteuerung, wodurch die Produktkosten um 13 % gesenkt wurden</span><span class="l-en">Ran and improved budget planning, cost control and target-vs-actual comparisons in project control, reducing product costs by 13%</span></li>
+      </ul>
+    </div>
+
+    <div class="job" id="job-zf">
+      <div class="jh"><h3><span class="l-de">Werkstudent Project Validation Management</span><span class="l-en">Working Student, Project Validation Management</span></h3><span class="date">03/2022 – 10/2022</span></div>
+      <div class="org">ZF Friedrichshafen AG, Koblenz</div>
+      <ul class="b">
+        <li data-t="qa"><span class="l-de">Validierung von Testaktivitäten und Umsetzung der Schritte nach ASPICE und V-Modell</span><span class="l-en">Validated test activities and implemented the required steps according to ASPICE and the V-model</span></li>
+        <li data-t="bi qa"><span class="l-de">Monitoring und Reporting des Reifegrades über alle Systeme hinweg mit IBM DOORS, PTC Windchill und Power BI</span><span class="l-en">Monitored and reported maturity across all systems with IBM DOORS, PTC Windchill and Power BI</span></li>
+        <li data-t="pm bi"><span class="l-de">Prozessauswertung und Erarbeitung von Verbesserungsvorschlägen; Entwicklung und Konsolidierung von KPIs sowie PM-Prozessen und Projekt-Reviews</span><span class="l-en">Evaluated processes and proposed improvements; developed and consolidated KPIs, PM processes and project reviews</span></li>
+      </ul>
+    </div>
+
+    <div class="job" id="job-aict">
+      <div class="jh"><h3><span class="l-de">Maschinenbauingenieur / SPS-Programmierer</span><span class="l-en">Mechanical Engineer / PLC Programmer</span></h3><span class="date">10/2017 – 10/2021</span></div>
+      <div class="org"><span class="l-de">AICT, Alexandria (Ägypten)</span><span class="l-en">AICT, Alexandria (Egypt)</span></div>
+      <ul class="b">
+        <li data-t="auto"><span class="l-de">Planung der vorbeugenden Wartung von STS-Kränen im Hafen; Verantwortung für Software und Hardware des SPS-Systems sowie Maschinen- und SPS-Programmierung (CoDeSys, Siemens Step 7 / TIA Portal, FUJI, GE)</span><span class="l-en">Planned preventive maintenance of ship-to-shore (STS) cranes in the port; owned PLC software and hardware and programmed machines and PLCs (CoDeSys, Siemens Step 7 / TIA Portal, FUJI, GE)</span></li>
+        <li data-t="qa"><span class="l-de">Fehlersuche, Ursachenanalyse und Behebung schwerer elektrischer Störungen (u. a. Bussysteme, I/O-Module, Hochspannungsantriebe)</span><span class="l-en">Troubleshot, root-caused and fixed major electrical faults (bus systems, I/O modules, high-voltage drives)</span></li>
+        <li data-t="auto pm"><span class="l-de">Dokumentation von Alarmen und Automatisierung der Wartungssysteme inklusive Lösungsdokumentation</span><span class="l-en">Documented alarms and automated maintenance systems, including solution documentation</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="two">
+    <section id="sec-edu">
+      <h2><span class="l-de">Ausbildung &amp; Zertifikate</span><span class="l-en">Education &amp; certificates</span> <span class="hint"><span class="l-de">↗ zum Prüfen anklicken</span><span class="l-en">↗ click to verify</span></span></h2>
+      <div class="edu">
+        <div class="row" id="edu-bsc"><div><b>Bachelor of Mechanical Engineering</b><small>Arab Academy for Science and Technology</small></div><span class="yr">2016</span></div>
+        <div class="row" id="edu-ssgb"><a href="https://www.sixsigma-institute.org/certifications/SixSigma-Institute.Org-CSSGB5f43874fff-41046763878315.pdf" target="_blank" rel="noopener"><b>Six Sigma Green Belt</b> <span class="arr">↗</span></a><span class="yr">2024</span></div>
+        <div class="row" id="edu-gpm"><a href="https://www.coursera.org/account/accomplishments/certificate/YE0SKN8JX8PM" target="_blank" rel="noopener"><b>Google Professional Project Management Diploma</b> <span class="arr">↗</span></a><span class="yr">2022</span></div>
+        <div class="row" id="edu-agile"><a href="https://www.coursera.org/account/accomplishments/certificate/N2XT8X2BD673" target="_blank" rel="noopener"><b>Google Agile Project Management Professional Certificate</b> <span class="arr">↗</span></a><span class="yr">2026</span></div>
+        <div class="row"><div><a href="https://www.coursera.org/account/accomplishments/certificate/L2YHCQ9HKS7G" target="_blank" rel="noopener"><b>IBM Information Technology (IT) Fundamentals for Everyone</b> <span class="arr">↗</span></a><small><span class="l-de">Kurs aus dem Programm IBM IT Scrum Master</span><span class="l-en">Course within the IBM IT Scrum Master program</span></small></div><span class="yr">2026</span></div>
+        <div class="row"><a href="https://www.coursera.org/account/accomplishments/certificate/FO7SZAQU4DOC" target="_blank" rel="noopener"><b>Microsoft Power BI Business Analyst</b> <span class="arr">↗</span></a><span class="yr prog"><span class="l-de">in Bearbeitung</span><span class="l-en">in progress</span> · 2026</span></div>
+        <div class="row"><b>IBM IT Scrum Master</b><span class="yr prog"><span class="l-de">in Bearbeitung</span><span class="l-en">in progress</span> · 2026</span></div>
+      </div>
+    </section>
+    <section id="sec-lang">
+      <h2><span class="l-de">Sprachen</span><span class="l-en">Languages</span></h2>
+      <div class="langs">
+        <b><span class="l-de">Arabisch</span><span class="l-en">Arabic</span></b><div class="lv" data-l="6"></div><span class="c"><span class="l-de">Mutterspr.</span><span class="l-en">native</span></span>
+        <b><span class="l-de">Deutsch</span><span class="l-en">German</span></b><div class="lv" data-l="6"></div><span class="c">C2</span>
+        <b><span class="l-de">Englisch</span><span class="l-en">English</span></b><div class="lv" data-l="5"></div><span class="c">C1</span>
+        <b><span class="l-de">Italienisch</span><span class="l-en">Italian</span></b><div class="lv" data-l="4"></div><span class="c">B2</span>
+        <b><span class="l-de">Spanisch</span><span class="l-en">Spanish</span></b><div class="lv" data-l="3"></div><span class="c">B1</span>
+        <div class="scale"><span>A1</span><span>A2</span><span>B1</span><span>B2</span><span>C1</span><span>C2</span></div>
+      </div>
+      <div class="lic"><span class="l-de">Führerschein Klasse B</span><span class="l-en">Driving licence, class B</span></div>
+    </section>
+  </div>
+
+  <section>
+    <h2><span class="l-de">Kernkompetenzen &amp; Tools</span><span class="l-en">Core skills &amp; tools</span></h2>
+    <dl class="kk">
+      <dt>Process Excellence</dt>
+      <dd><span class="l-de">Prozessanalyse, -optimierung und -modellierung, Workflow-Design, Prozessdokumentation, Prozess-KPIs, Qualitätsmanagement, Six Sigma, ASPICE, Change Management</span><span class="l-en">Process analysis, optimisation and modelling, workflow design, process documentation, process KPIs, quality management, Six Sigma, ASPICE, change management</span></dd>
+      <dt><span class="l-de">Projektmanagement</span><span class="l-en">Project management</span></dt>
+      <dd><span class="l-de">Projektplanung und -steuerung, Termin- und Ressourcenplanung, Risiko- und Änderungsmanagement, Stakeholder-Management, Reporting; V-Modell, Scrum, Kanban, SAFe</span><span class="l-en">Project planning and control, schedule and resource planning, risk and change management, stakeholder management, reporting; V-model, Scrum, Kanban, SAFe</span></dd>
+      <dt>Business Analysis</dt>
+      <dd><span class="l-de">KPI-Management, Power-BI-Reporting, Risikoanalyse, Machbarkeitsanalyse, Budgetplanung, Kostenkontrolle, Soll-Ist-Vergleich</span><span class="l-en">KPI management, Power BI reporting, risk analysis, feasibility analysis, budget planning, cost control, target-vs-actual analysis</span></dd>
+      <dt><span class="l-de">Kaufmännisch</span><span class="l-en">Commercial</span></dt>
+      <dd><span class="l-de">Grundverständnis von Rechnungswesen</span><span class="l-en">Basic understanding of accounting</span></dd>
+      <dt>Tools</dt>
+      <dd class="tools"><span>Jira</span><span>Confluence</span><span>MS Project</span><span>Power BI</span><span>Visio</span><span>draw.io</span><span>Polarion</span><span>IBM DOORS</span><span>SharePoint</span><span>Codebeamer</span><span>Cplace</span><span>Bitbucket</span><span>SonarQube</span><span>Jenkins</span><span>SQL</span></dd>
+    </dl>
+  </section>
+
+  <footer class="foot"><span>Khaled Elsayed · <span class="l-de">Lebenslauf</span><span class="l-en">Curriculum vitae</span></span><span><span class="l-de">Seite</span><span class="l-en">Page</span> 2 / 2</span></footer>
+</article>
+
+<script>
+(function(){
+  var body=document.body;
+  var NAMES={pm:["Prozessmanagement","Process management"],ps:["Projektsteuerung","Project control"],bi:["BI & KPIs","BI & KPIs"],
+    risk:["Risikomanagement","Risk management"],auto:["Automatisierung","Automation"],qa:["Qualität & ASPICE","Quality & ASPICE"],
+    agile:["Agil","Agile"],sc:["Stakeholder & Change","Stakeholders & change"]};
+  var items=[].slice.call(document.querySelectorAll("ul.b li[data-t]"));
+  var current="all";
+
+  // counts on chips
+  document.querySelectorAll(".chip[data-f]").forEach(function(c){
+    var f=c.dataset.f; if(f==="all") return;
+    var n=items.filter(function(li){return li.dataset.t.split(" ").indexOf(f)>-1}).length;
+    c.querySelector(".n").textContent=n;
+  });
+
+  // language bars
+  document.querySelectorAll(".lv").forEach(function(el){
+    var n=+el.dataset.l, h="";
+    for(var i=0;i<6;i++) h+='<i class="'+(i<n?"on":"")+'"></i>';
+    el.innerHTML=h;
+  });
+
+  function lang(){return body.dataset.lang==="en"?1:0}
+
+  function updateStatus(){
+    var st=document.getElementById("status");
+    if(current==="all"){st.hidden=true;return}
+    var n=items.filter(function(li){return li.classList.contains("hit")}).length;
+    st.innerHTML=lang()
+      ? "Highlighting <b>"+NAMES[current][1]+"</b>: "+n+" achievements across all roles."
+      : "Hervorgehoben: <b>"+NAMES[current][0]+"</b> – "+n+" Punkte über alle Stationen.";
+    st.hidden=false;
+  }
+
+  function setFilter(f){
+    if(f===current && f!=="all") f="all";
+    current=f;
+    body.classList.toggle("filtering",f!=="all");
+    items.forEach(function(li){li.classList.toggle("hit",f!=="all" && li.dataset.t.split(" ").indexOf(f)>-1)});
+    document.querySelectorAll("[data-f]").forEach(function(b){b.setAttribute("aria-pressed",String(b.dataset.f===f))});
+    updateStatus();
+  }
+
+  function setLang(l){
+    body.dataset.lang=l;
+    document.documentElement.lang=l;
+    document.querySelectorAll(".seg button").forEach(function(b){b.setAttribute("aria-pressed",String(b.dataset.lang===l))});
+    document.title=l==="en"?"Khaled Elsayed CV":"Khaled Elsayed Lebenslauf";
+    try{localStorage.setItem("cv-lang",l)}catch(e){}
+    updateStatus();
+  }
+
+  document.querySelectorAll("[data-f]").forEach(function(b){b.addEventListener("click",function(){setFilter(b.dataset.f)})});
+  document.querySelectorAll(".seg button").forEach(function(b){b.addEventListener("click",function(){
+    setLang(b.dataset.lang);
+    try{history.replaceState(null,"","#"+b.dataset.lang)}catch(e){}
+  })});
+
+  function fromHash(){
+    var h=(location.hash||"").replace("#","");
+    if(h==="en"||h==="de") return h;
+    try{var s=localStorage.getItem("cv-lang"); if(s==="en"||s==="de") return s}catch(e){}
+    return "de";
+  }
+  // jump links: scroll inside the page without touching the language hash
+  document.querySelectorAll("a[data-go]").forEach(function(a){
+    a.addEventListener("click",function(e){
+      var t=document.getElementById(a.getAttribute("href").slice(1));
+      if(!t) return;
+      e.preventDefault();
+      var reduce=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;
+      var barH=(document.querySelector(".bar")||{offsetHeight:0}).offsetHeight;
+      var y=t.getBoundingClientRect().top+window.pageYOffset-barH-12;
+      window.scrollTo({top:y,behavior:reduce?"auto":"smooth"});
+      t.classList.remove("flash"); void t.offsetWidth; t.classList.add("flash");
+      setTimeout(function(){t.classList.remove("flash")},1900);
+    });
+  });
+  setLang(fromHash());
+  window.addEventListener("hashchange",function(){setLang(fromHash())});
+
+})();
+</script>
+
+</body>
+</html>
