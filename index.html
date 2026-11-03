@@ -18,10 +18,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,400..800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
+[hidden]:not([hidden=until-found i]){display:none!important}
 /* Layout: a project dossier. Header sheet, impact KPIs, case studies, capability switch (phases / process register), sample dashboard, career timeline, toolbox, contact. */
 :root{
   --paper:#f3f4f1; --sheet:#ffffff; --ink:#18212b; --muted:#5b6672; --line:#d6dad6;
-  --accent:#b8561c; --accent-soft:#f4e4d8; --done:#2f6b4f; --tray:#e6e9e4;
+  --accent:#1471b5; --accent-soft:#e4f1fc; --done:#2f6b4f; --tray:#e6e9e4;
   --c-plan:#9aa6b2;
   --g1:#2f62b5; --g2:#0f7f86; --g3:#7a4fc4; --g4:#2f7a52; --g5:#c2410c; --g6:#a87a0a; --c-ok:#2f6b4f; --c-warn:#c08a14; --c-bad:#b23a2e;
   --f-display:"Archivo","Arial Narrow",Arial,sans-serif;
@@ -30,11 +31,11 @@
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
   --paper:#12171d; --sheet:#1a2129; --ink:#e8ebe7; --muted:#9aa4ae; --line:#2c353f;
-  --accent:#e2834a; --accent-soft:#3a2619; --done:#6fbf96; --tray:#232c35;
+  --accent:#6cbcf2; --accent-soft:#15324a; --done:#6fbf96; --tray:#232c35;
   --c-plan:#5d6a77; --g1:#7fa6ec; --g2:#4fc3c9; --g3:#b39af0; --g4:#6fbf96; --g5:#f08a52; --g6:#e0b13f; --c-ok:#6fbf96; --c-warn:#e0b13f; --c-bad:#e5705f; color-scheme:dark}}
 :root[data-theme="dark"]{
   --paper:#12171d; --sheet:#1a2129; --ink:#e8ebe7; --muted:#9aa4ae; --line:#2c353f;
-  --accent:#e2834a; --accent-soft:#3a2619; --done:#6fbf96; --tray:#232c35;
+  --accent:#6cbcf2; --accent-soft:#15324a; --done:#6fbf96; --tray:#232c35;
   --c-plan:#5d6a77; --g1:#7fa6ec; --g2:#4fc3c9; --g3:#b39af0; --g4:#6fbf96; --g5:#f08a52; --g6:#e0b13f; --c-ok:#6fbf96; --c-warn:#e0b13f; --c-bad:#e5705f; color-scheme:dark}
 
 *{box-sizing:border-box}
@@ -106,7 +107,7 @@ a.chip.link .ext{font-size:11px;color:var(--accent)}
 .hint{font-size:14px;color:var(--muted);margin:12px 0 0}
 
 /* Capability switch */
-.switch{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.switch{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
 .cap{all:unset;box-sizing:border-box;cursor:pointer;background:var(--sheet);border:1.5px solid var(--line);border-radius:6px;padding:20px 22px;display:flex;flex-direction:column;gap:6px;min-width:0;transition:border-color .15s,background .15s}
 .cap:hover{border-color:var(--ink)}
 .cap:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
@@ -392,11 +393,247 @@ button.thumb:hover img{transform:translateY(-4px)}
   .sar dd{margin-bottom:8px}
   .tl-detail{padding:16px 18px}
 }
+
+/* Scrum panel */
+.sc-chips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px;padding:0;list-style:none}
+.sc-box{border:1px solid var(--line);border-radius:4px;padding:14px;display:grid;gap:12px;min-width:0}
+.sc-top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.sc-top strong{font-family:var(--f-mono);font-weight:500;font-size:12px;letter-spacing:.1em;text-transform:uppercase}
+.sc-scroll{overflow-x:auto;min-width:0}
+.sc-pi{display:grid;grid-template-columns:minmax(74px,auto) repeat(6,minmax(64px,1fr)) minmax(74px,auto);gap:4px;min-width:600px;list-style:none;margin:0;padding:0}
+.sc-sp{all:unset;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:column;gap:1px;padding:9px 10px;border:1.5px solid var(--line);border-radius:4px;background:var(--paper);min-width:0;height:100%}
+.sc-sp b{font-family:var(--f-display);font-stretch:85%;font-weight:800;font-size:18px;line-height:1.1}
+.sc-sp span{font-family:var(--f-mono);font-size:11px;color:var(--muted)}
+.sc-sp.ip{border-style:dashed}
+.sc-sp.mk{background:var(--tray);border-color:transparent}
+.sc-sp.mk b{font-size:14px;color:var(--g5)}
+.sc-sp:hover{border-color:var(--ink)}
+.sc-sp:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.sc-sp[aria-pressed="true"]{background:var(--ink);border-color:var(--ink)}
+.sc-sp[aria-pressed="true"] b,.sc-sp[aria-pressed="true"] span{color:var(--paper)}
+.sc-split{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,2fr);gap:12px;align-items:start}
+.sc-detail{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;background:var(--tray);border-radius:4px;padding:14px;font-size:14px;margin:0}
+.sc-detail .full{grid-column:1/-1}
+.sc-detail dt{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.sc-detail dd{margin:2px 0 0}
+.sc-detail .goal{font-weight:600;font-size:15px}
+.sc-tag{display:inline-block;font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;padding:1px 7px;border-radius:3px;border:1px solid currentColor;white-space:nowrap}
+.sc-tag.scale{color:var(--g5)}
+.sc-chart{background:var(--sheet);border:1px solid var(--line);border-radius:4px;padding:12px;min-width:0}
+.sc-chart h5{margin:0 0 6px;font-size:13px;font-weight:600}
+.sc-chart svg{width:100%;height:auto;display:block;overflow:visible}
+.sc-chart svg text{fill:var(--muted);font-family:var(--f-mono);font-size:10px}
+.sc-chart svg .hit{cursor:pointer}
+.sc-chart svg .hit:focus{outline:none}
+.sc-chart svg .hit:focus-visible rect.done{stroke:var(--accent);stroke-width:2}
+.sc-chart .legend{margin-top:6px}
+
+/* Sprint calendar */
+.sc-cal{display:grid;grid-template-columns:repeat(5,minmax(96px,1fr));gap:4px;min-width:520px}
+.sc-wk{grid-column:1/-1;font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+.sc-day{background:var(--paper);border:1px solid var(--line);border-radius:4px;padding:8px;display:flex;flex-direction:column;gap:4px;min-width:0}
+.sc-day .dh{font-family:var(--f-mono);font-size:11px;color:var(--muted);display:flex;justify-content:space-between}
+.sc-ev{all:unset;box-sizing:border-box;cursor:pointer;font-size:12px;font-weight:500;line-height:1.25;padding:4px 7px;border-radius:3px;border-left:3px solid var(--ec);background:color-mix(in srgb,var(--ec) 12%,var(--sheet))}
+.sc-ev:hover{background:color-mix(in srgb,var(--ec) 24%,var(--sheet))}
+.sc-ev:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.sc-ev[aria-pressed="true"]{background:var(--ec);color:var(--sheet)}
+
+/* Artifacts */
+.sc-tabs{display:inline-flex;flex-wrap:wrap;border:1.5px solid var(--ink);border-radius:4px;overflow:hidden;align-self:start;justify-self:start}
+.sc-tabs button{all:unset;cursor:pointer;font-size:14px;font-weight:600;padding:7px 14px}
+.sc-tabs button[aria-selected="true"]{background:var(--ink);color:var(--paper)}
+.sc-tabs button:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.sc-commit{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 14px;align-items:baseline;padding:12px 14px;border:1.5px solid var(--accent);border-radius:4px;background:var(--accent-soft);font-size:15px}
+.sc-commit .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.sc-commit .v{font-weight:600}
+.sc-note{font-size:13px;color:var(--muted);margin:0}
+.sc-pbl{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.sc-pbi{border:1px solid var(--line);border-radius:4px;background:var(--paper);min-width:0}
+.sc-pbi>button{all:unset;box-sizing:border-box;cursor:pointer;display:grid;grid-template-columns:24px 62px minmax(0,1fr) auto auto;gap:10px;align-items:center;width:100%;padding:9px 12px;font-size:14px}
+.sc-pbi>button:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.sc-pbi>button:hover{background:var(--tray)}
+.sc-pbi .rk{font-family:var(--f-mono);font-size:12px;color:var(--muted);text-align:right}
+.sc-pbi .id{font-family:var(--f-mono);font-size:12px;color:var(--accent)}
+.sc-pbi .tt{font-weight:500;min-width:0}
+.sc-pts{font-family:var(--f-mono);font-size:12px;padding:1px 8px;border:1px solid var(--line);border-radius:999px;white-space:nowrap;font-variant-numeric:tabular-nums}
+.sc-st{font-family:var(--f-mono);font-size:11px;padding:1px 7px;border-radius:3px;white-space:nowrap;color:var(--sheet)}
+.sc-st.ready{background:var(--c-ok)}.sc-st.ref{background:var(--c-warn)}.sc-st.new{background:var(--c-plan)}
+.sc-pbi .more{padding:4px 12px 12px 108px;font-size:14px;display:grid;gap:6px}
+.sc-pbi .more ul{margin:0;padding-left:18px}
+.sc-pbi[data-open="true"]{border-color:var(--ink)}
+.sc-sbl{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:12px;align-items:start}
+.sc-board{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.sc-col{background:var(--tray);border-radius:4px;padding:8px;display:flex;flex-direction:column;gap:6px;min-width:0;min-height:120px}
+.sc-col h5{margin:0 0 2px;font-family:var(--f-mono);font-weight:500;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);display:flex;justify-content:space-between}
+.sc-card{all:unset;box-sizing:border-box;cursor:pointer;background:var(--sheet);border:1px solid var(--line);border-radius:4px;padding:8px 9px;display:flex;flex-direction:column;gap:4px;font-size:13px;line-height:1.3;transition:transform .15s,border-color .15s}
+.sc-card:hover{border-color:var(--ink);transform:translateY(-1px)}
+.sc-card:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.sc-card .ch{display:flex;justify-content:space-between;gap:6px;font-family:var(--f-mono);font-size:11px;color:var(--accent)}
+.sc-col.done .sc-card{opacity:.75}
+.sc-col.done .sc-card .ch{color:var(--done)}
+.sc-row{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px}
+.sc-link{all:unset;cursor:pointer;font-size:14px;font-weight:600;color:var(--accent);text-decoration:underline;text-underline-offset:3px}
+.sc-link:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.sc-dod{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.sc-chk{all:unset;box-sizing:border-box;cursor:pointer;display:grid;grid-template-columns:20px minmax(0,1fr);gap:10px;align-items:start;width:100%;padding:9px 11px;border:1px solid var(--line);border-radius:4px;background:var(--paper);font-size:14px}
+.sc-chk:hover{border-color:var(--ink)}
+.sc-chk:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.sc-chk i{width:18px;height:18px;border:1.5px solid var(--muted);border-radius:3px;display:grid;place-items:center;font-style:normal;font-size:12px;line-height:1;color:var(--sheet)}
+.sc-chk[aria-checked="true"] i{background:var(--done);border-color:var(--done)}
+.sc-meter{height:8px;background:var(--tray);border-radius:999px;overflow:hidden}
+.sc-meter span{display:block;height:100%;background:var(--done);transition:width .3s}
+.sc-pill{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;padding:3px 10px;border-radius:999px;color:var(--sheet)}
+.sc-pill.good{background:var(--c-ok)}.sc-pill.ok{background:var(--c-warn)}.sc-pill.bad{background:var(--c-bad)}
+.sc-inc{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.sc-inc li{font-size:13px;padding:3px 9px;border:1px solid var(--line);border-radius:4px;background:var(--paper)}
+.sc-inc li b{font-family:var(--f-mono);font-weight:500;font-size:11px;color:var(--done);margin-right:6px}
+
+/* Scenarios */
+.sc-scn{display:grid;grid-template-columns:220px minmax(0,1fr);gap:12px;align-items:start}
+.sc-picks{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.sc-pick{all:unset;box-sizing:border-box;cursor:pointer;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;align-items:center;width:100%;padding:9px 11px;border:1.5px solid var(--line);border-radius:4px;background:var(--paper);font-size:14px;font-weight:500;line-height:1.3}
+.sc-pick small{display:block;font-family:var(--f-mono);font-size:11px;font-weight:400;color:var(--muted);margin-bottom:2px}
+.sc-pick:hover{border-color:var(--ink)}
+.sc-pick:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.sc-pick[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-soft)}
+.sc-dot{width:12px;height:12px;border-radius:50%;border:1.5px solid var(--line);flex:none}
+.sc-dot.good{background:var(--c-ok);border-color:var(--c-ok)}.sc-dot.ok{background:var(--c-warn);border-color:var(--c-warn)}.sc-dot.bad{background:var(--c-bad);border-color:var(--c-bad)}
+.sc-play{display:grid;gap:10px;min-width:0}
+.sc-sit{background:var(--tray);border-radius:4px;padding:14px 16px;display:grid;gap:4px}
+.sc-sit .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.sc-sit p{margin:0;font-size:15px}
+.sc-opts{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.sc-opt{all:unset;box-sizing:border-box;cursor:pointer;display:grid;grid-template-columns:26px minmax(0,1fr);gap:10px;align-items:start;width:100%;padding:10px 12px;border:1.5px solid var(--line);border-radius:4px;background:var(--sheet);font-size:14px;line-height:1.4}
+.sc-opt b{font-family:var(--f-mono);font-size:12px;font-weight:500;width:22px;height:22px;border:1.5px solid var(--ink);border-radius:50%;display:grid;place-items:center}
+.sc-opt:hover{border-color:var(--ink)}
+.sc-opt:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.sc-fb{border-left:4px solid var(--qc);background:color-mix(in srgb,var(--qc) 10%,var(--sheet));border-radius:0 4px 4px 0;padding:12px 14px;display:grid;gap:6px;font-size:14px}
+.sc-fb .h{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-weight:600}
+.sc-fb p{margin:0}
+.sc-fb .ref{font-family:var(--f-mono);font-size:11px;color:var(--muted)}
+.sc-end{border:1.5px solid var(--ink);border-radius:4px;padding:14px 16px;display:grid;gap:8px}
+.sc-end p{margin:0;font-size:14px}
+.sc-trk{border-top:1px dashed var(--line);padding-top:12px;display:grid;gap:10px}
+.sc-path{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.sc-path li{display:flex;align-items:center;gap:6px;font-size:13px}
+.sc-path li:not(:last-child)::after{content:"→";color:var(--muted)}
+.sc-path .st{padding:3px 9px;border-radius:4px;border:1px solid var(--line);background:var(--paper)}
+.sc-path .ch{padding:3px 9px;border-radius:4px;color:var(--sheet);font-weight:600}
+.sc-path .ch.good{background:var(--c-ok)}.sc-path .ch.ok{background:var(--c-warn)}.sc-path .ch.bad{background:var(--c-bad)}
+.sc-map{list-style:none;margin:0;padding:0;display:grid;gap:4px;font-size:13px}
+.sc-map ul{list-style:none;margin:4px 0 0 22px;padding:0 0 0 12px;border-left:1.5px solid var(--line);display:grid;gap:4px}
+.sc-node{display:inline-flex;align-items:center;gap:7px;padding:3px 9px;border-radius:4px;border:1px solid var(--line);background:var(--paper);color:var(--muted);max-width:100%}
+.sc-node .q{width:8px;height:8px;border-radius:50%;flex:none;background:var(--qc)}
+.sc-node.on{color:var(--ink);border-color:var(--qc);background:color-mix(in srgb,var(--qc) 14%,var(--sheet));font-weight:600}
+.sc-node.off{opacity:.55}
+.sc-ctrl{display:flex;flex-wrap:wrap;gap:8px}
+.sc-score{font-size:13px;color:var(--muted)}
+.sc-ref{font-family:var(--f-mono);font-size:12px;color:var(--muted)}
+.sc-items{display:flex;flex-wrap:wrap;gap:8px}
+.sc-item{all:unset;box-sizing:border-box;cursor:pointer;display:inline-flex;align-items:center;gap:8px;padding:6px 12px 6px 6px;border:1.5px solid color-mix(in srgb,var(--ic) 45%,var(--line));border-radius:999px;background:color-mix(in srgb,var(--ic) 8%,var(--sheet));font-size:13px;font-weight:500}
+.sc-item b{font-family:var(--f-mono);font-size:11px;font-weight:500;padding:2px 8px;border-radius:999px;background:var(--ic);color:var(--sheet)}
+.sc-item em{font-style:normal;font-family:var(--f-mono);font-size:11px;color:var(--muted)}
+.sc-item:hover{border-color:var(--ic)}
+.sc-item:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.sc-item[aria-pressed="true"]{background:var(--ic);border-color:var(--ic);color:var(--sheet)}
+.sc-item[aria-pressed="true"] b{background:var(--sheet);color:var(--ic)}
+.sc-item[aria-pressed="true"] em{color:var(--sheet);opacity:.85}
+.sc-phases{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12px;color:var(--muted)}
+.sc-ph{display:inline-flex;align-items:center;gap:6px}
+.sc-ph i{width:10px;height:10px;border-radius:2px;background:var(--pc)}
+.sc-ph.on{color:var(--ink);font-weight:600}
+.sc-prog{height:6px;border-radius:999px;background:var(--tray);position:relative;overflow:hidden}
+.sc-prog span{position:absolute;inset:0 auto 0 0;border-radius:999px;transition:width .3s,background .3s}
+.sc-wsteps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.sc-wstep{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:10px;width:100%;height:100%;padding:10px 12px;border-radius:5px;border-left:4px solid var(--pc);background:color-mix(in srgb,var(--pc) 10%,var(--sheet));font-size:13px;font-weight:600;line-height:1.25;transition:transform .15s,background .15s}
+.sc-wstep b{flex:none;font-family:var(--f-mono);font-size:11px;font-weight:500;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;border:1.5px solid var(--pc);color:var(--pc);background:var(--sheet)}
+.sc-wstep.past b{background:var(--pc);color:var(--sheet)}
+.sc-wstep:hover{background:color-mix(in srgb,var(--pc) 22%,var(--sheet));transform:translateX(2px)}
+.sc-wstep:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.sc-wstep[aria-pressed="true"]{background:var(--pc);color:var(--sheet)}
+.sc-wstep[aria-pressed="true"] b{background:var(--sheet);color:var(--pc);border-color:var(--sheet)}
+.sc-wfd{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:0;padding:14px 16px;border-radius:5px;border-left:5px solid var(--pc);background:color-mix(in srgb,var(--pc) 9%,var(--sheet));font-size:14px;transition:background .2s}
+.sc-wfd .full{grid-column:1/-1}
+.sc-wfd dt{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--pc)}
+.sc-wfd dd{margin:2px 0 0}
+.sc-wfh{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;font-size:16px}
+.sc-phtag{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:2px 9px;border-radius:3px;background:var(--pc);color:var(--sheet)}
+.sc-wfit{background:var(--sheet);border:1px solid var(--line);border-left:4px solid var(--ic);border-radius:4px;padding:10px 12px;display:grid;gap:4px}
+.sc-wfit-top{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-family:var(--f-mono);font-size:12px;color:var(--muted)}
+.sc-wfit-top b{font-weight:500;padding:1px 8px;border-radius:999px;background:var(--ic);color:var(--sheet)}
+.sc-wfit p{margin:0;font-size:15px}
+.sc-rm{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:12px;align-items:start}
+.sc-rmwrap{display:grid;gap:8px;min-width:0}
+.sc-rm .sc-wfd{grid-template-columns:1fr;position:sticky;top:calc(env(safe-area-inset-top,0px) + 68px)}
+.sc-tl{display:grid;grid-template-columns:minmax(76px,auto) repeat(3,minmax(0,1fr));border:1px solid var(--line);border-radius:5px;overflow:hidden;background:var(--sheet)}
+.sc-tl .th{padding:8px;background:var(--tray);border-bottom:1px solid var(--line)}
+.sc-tl .tlab{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);display:flex;align-items:flex-end}
+.sc-tlh{all:unset;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:column;align-items:flex-start;gap:4px;font-size:12px;font-weight:600;line-height:1.25;border-bottom:3px solid transparent!important;min-width:0}
+.sc-tlh b{font-family:var(--f-mono);font-size:11px;font-weight:500;padding:1px 7px;border-radius:999px;background:var(--ic);color:var(--sheet)}
+.sc-tlh:hover{background:color-mix(in srgb,var(--ic) 12%,var(--tray))}
+.sc-tlh:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.sc-tlh[aria-pressed="true"]{border-bottom-color:var(--ic)!important;background:color-mix(in srgb,var(--ic) 14%,var(--tray))}
+.sc-tl .tr{padding:7px 8px;border-top:1px dashed var(--line);display:flex;flex-direction:column;justify-content:center;gap:1px;font-size:12px;color:var(--muted);border-left:3px solid transparent}
+.sc-tl .tr b{font-family:var(--f-mono);font-size:10px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--ink)}
+.sc-tl .tr.on{color:var(--ink);font-weight:600;border-left-color:var(--accent);background:var(--accent-soft)}
+.sc-tl .tc{position:relative;border-top:1px dashed var(--line);padding:5px 6px;display:flex;flex-direction:column;justify-content:center;gap:4px;min-width:0;min-height:34px}
+.sc-tl .tc::before{content:"";position:absolute;top:0;bottom:0;left:15px;width:2px;background:color-mix(in srgb,var(--ic) 30%,transparent)}
+.sc-tl .tc.sel{background:color-mix(in srgb,var(--ic) 6%,var(--sheet))}
+.sc-tl .sb{border-top:1.5px solid var(--muted)}
+.sc-tk{all:unset;box-sizing:border-box;cursor:pointer;position:relative;display:flex;flex-wrap:wrap;align-items:center;gap:3px 6px;padding:3px 7px 3px 3px;border-radius:5px;border:1.5px solid color-mix(in srgb,var(--pc) 45%,var(--line));background:color-mix(in srgb,var(--pc) 13%,var(--sheet));font-size:12px;font-weight:600;line-height:1.2;min-width:0;transition:transform .15s}
+.sc-tk span{flex:1 1 auto;min-width:min-content}
+.sc-tk em{font-style:normal;font-family:var(--f-mono);font-size:10px;font-weight:500;opacity:.8}
+.sc-tk i{flex:none;font-style:normal;font-family:var(--f-mono);font-size:10px;font-weight:500;width:18px;height:18px;border-radius:50%;display:grid;place-items:center;background:var(--pc);color:var(--sheet)}
+.sc-tk.cont{border-style:dashed;font-weight:500;background:var(--sheet)}
+.sc-tk.same{border-color:var(--pc);box-shadow:0 0 0 2px color-mix(in srgb,var(--pc) 25%,transparent)}
+.sc-tk:hover{border-color:var(--pc);transform:translateX(2px)}
+.sc-tk:focus-visible{outline:2px solid var(--ink);outline-offset:1px}
+.sc-tk[aria-pressed="true"]{background:var(--pc);border-color:var(--pc);color:var(--sheet)}
+.sc-tk[aria-pressed="true"] i{background:var(--sheet);color:var(--pc)}
+@media (max-width:900px){.sc-rm{grid-template-columns:1fr}.sc-rm .sc-wfd{position:static;grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.sc-tl{min-width:470px;grid-template-columns:minmax(64px,auto) repeat(3,minmax(0,1fr))}.sc-tl .tr{padding:6px 5px}.sc-tl .tc{padding:4px}.sc-tl .tc::before{left:12px}.sc-tk{font-size:11px;gap:4px;padding:3px 4px 3px 2px}.sc-rm .sc-wfd{grid-template-columns:1fr}}
+@media (max-width:900px){.sc-wfd{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.sc-wsteps{grid-template-columns:1fr}.sc-wstep{padding:8px 10px}.sc-wfd{grid-template-columns:1fr}}
+@media (max-width:900px){.sc-split,.sc-sbl,.sc-scn{grid-template-columns:1fr}.sc-picks{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){
+  .sc-detail,.sc-dod{grid-template-columns:1fr}
+  .sc-board{grid-template-columns:1fr}
+  .sc-col{min-height:0}
+  .sc-picks{grid-template-columns:1fr}
+  .sc-pbi>button{grid-template-columns:20px minmax(0,1fr) auto auto;row-gap:2px}
+  .sc-pbi .tt{grid-column:2/-1;grid-row:2}
+  .sc-pbi .more{padding-left:12px}
+}
+
+/* Role switch */
+.hire{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:18px}
+.hire-l{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.hire button{all:unset;box-sizing:border-box;cursor:pointer;font-size:14px;font-weight:600;padding:7px 14px;border:1.5px solid var(--line);border-radius:999px;background:var(--sheet);transition:background .15s,border-color .15s,color .15s}
+.hire button:hover{border-color:var(--accent);color:var(--accent)}
+.hire button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.hire button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--sheet)}
+.hire .hire-x{border:0;background:transparent;padding:7px 4px;font-weight:500;color:var(--accent);text-decoration:underline;text-underline-offset:3px}
+.hire .hire-x:hover{border:0}
+.role,.intro{transition:opacity .18s}
+.swap{opacity:.12}
+.kpis li.fit .kpi-l{color:var(--ink);font-weight:500}
+.cases .case.fit{border-color:var(--accent)}
+
+/* Sticky section menu */
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 64px)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:31;background:var(--paper)}
+.secnav{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:color-mix(in srgb,var(--paper) 90%,transparent);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-block:1px solid var(--line)}
+.secnav .wrap{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;padding-block:9px}
+.secnav .wrap::-webkit-scrollbar{display:none}
+.secnav a{flex:none;white-space:nowrap;font-size:14px;font-weight:500;padding:6px 13px;border-radius:999px;text-decoration:none;color:var(--muted);transition:background .15s,color .15s}
+.secnav a:hover{color:var(--ink);background:var(--tray)}
+.secnav a:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.secnav a.on{background:var(--accent);color:var(--sheet)}
+@media (max-width:560px){.hire button{font-size:13px;padding:6px 11px}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
 <body>
-
 
 <div class="wrap top">
   <span class="status" data-i18n="status">Available immediately · open to new roles</span>
@@ -411,8 +648,9 @@ button.thumb:hover img{transform:translateY(-4px)}
    <div class="hero-text">
     <p class="label" data-i18n="eyebrow">Portfolio · Work samples</p>
     <h1>Khaled<br>Elsayed</h1>
-    <p class="role" data-i18n="role">Process &amp; Project Manager · BI Analyst · IT Project Manager</p>
-    <p class="intro" data-i18n="intro">Project and process manager with 5+ years of experience analysing and optimising business processes and steering IT and automotive projects from planning to delivery. This portfolio collects samples of my own work. Every document opens online in read-only view.</p>
+    <p class="role" id="heroRole">Process &amp; Project Manager · Scrum Master · BI Analyst</p>
+    <div class="hire" role="group" aria-labelledby="hireL"><span class="hire-l" id="hireL">Profile focus</span><button type="button" data-role="pm">Project Manager</button><button type="button" data-role="pr">Process Manager</button><button type="button" data-role="sm">Scrum Master</button><button type="button" class="hire-x" id="hireAll" hidden>Show all</button></div>
+    <p class="intro" id="heroIntro">Project and process manager with 5+ years of experience analysing and optimising business processes and steering IT and automotive projects from planning to delivery. This portfolio collects samples of my own work. Every document opens online in read-only view.</p>
     <ul class="creds">
       <li><a class="chip link" href="https://www.sixsigma-institute.org/certifications/SixSigma-Institute.Org-CSSGB5f43874fff-41046763878315.pdf" target="_blank" rel="noopener" title="Verify certificate">Lean Six Sigma Green Belt<span class="ext" aria-hidden="true">↗</span></a></li>
       <li><a class="chip link" href="https://www.coursera.org/account/accomplishments/certificate/YE0SKN8JX8PM" target="_blank" rel="noopener" title="Verify certificate">Google Project Management<span class="ext" aria-hidden="true">↗</span></a></li>
@@ -438,6 +676,10 @@ button.thumb:hover img{transform:translateY(-4px)}
    </figure>
   </div>
 </header>
+
+<nav class="secnav" aria-label="Sections"><div class="wrap" id="secnav">
+  <a href="#cases" data-k="cases">Results</a><a href="#case" data-k="case">Case study</a><a href="#samples" data-k="samples">Work samples</a><a href="#dashboard" data-k="dashboard">Dashboard</a><a href="#career" data-k="career">Career</a><a href="#tools" data-k="tools">Toolbox</a><a href="#languages" data-k="languages">Languages</a><a href="#contact" data-k="contact">Contact</a>
+</div></nav>
 
 <!-- 1 IMPACT -->
 <section class="impact" aria-label="Impact">
@@ -544,6 +786,10 @@ button.thumb:hover img{transform:translateY(-4px)}
     <button class="cap" role="tab" id="tab-process" aria-controls="process" aria-selected="false">
       <span class="name" data-i18n="prName">Process Management</span>
       <span class="sub" data-i18n="prSub">Workflows and samples per process area</span>
+    </button>
+    <button class="cap" role="tab" id="tab-scrum" aria-controls="scrum" aria-selected="false">
+      <span class="name" data-i18n="scName">Scrum &amp; Agile</span>
+      <span class="sub" data-i18n="scSub">Anonymised Scrum project, interactive</span>
     </button>
   </div>
 
@@ -656,6 +902,71 @@ button.thumb:hover img{transform:translateY(-4px)}
         <div class="row-body"><div class="wf"><div class="wf-top"><strong>Workflow</strong><span class="tag-example" data-i18n="wfTag">Click a step</span></div><ol class="steps" id="steps-pb"></ol><dl class="step-detail" id="detail-pb" aria-live="polite"></dl></div><div class="empty"><strong data-i18n="samples">Samples</strong><span data-i18n="soon2">Coming soon</span></div></div>
       </li>
     </ul>
+  </div>
+
+  <div class="panel" id="scrum" role="tabpanel" aria-labelledby="tab-scrum" hidden>
+    <p class="case-note" data-sc="intro"></p>
+    <ul class="sc-chips">
+      <li><span class="tag-real" data-sc="tagReal"></span></li>
+      <li><span class="tag-example" data-sc="tagEx"></span></li>
+      <li><span class="chip" data-sc="chipSprint"></span></li>
+      <li><span class="chip" data-sc="chipPi"></span></li>
+      <li><span class="chip" data-sc="chipTeam"></span></li>
+    </ul>
+    <ol class="rows">
+      <li class="row">
+        <div class="row-head"><span class="num" data-sc="r1n"></span><h3 data-sc="r1"></h3><p data-sc="r1p"></p></div>
+        <div class="row-body">
+          <div class="sc-box">
+            <div class="sc-top"><strong data-sc="piLabel"></strong><span class="tag-example" data-sc="clickSprint"></span></div>
+            <div class="sc-scroll"><ol class="sc-pi" id="scPi"></ol></div>
+            <div class="sc-split">
+              <dl class="sc-detail" id="scSprintDetail" aria-live="polite"></dl>
+              <div class="sc-chart"><h5 data-sc="velH"></h5><svg id="scVel" viewBox="0 0 300 150" role="img"><title data-sc="velH"></title></svg>
+                <ul class="legend"><li><i style="background:var(--line)"></i><span data-sc="lgCommit"></span></li><li><i style="background:var(--g1)"></i><span data-sc="lgDone"></span></li><li><i style="background:var(--ink);height:2px;vertical-align:3px"></i><span data-sc="lgAvg"></span></li></ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li class="row">
+        <div class="row-head"><span class="num" data-sc="r2n"></span><h3 data-sc="r2"></h3><p data-sc="r2p"></p></div>
+        <div class="row-body">
+          <div class="sc-box">
+            <div class="sc-top"><strong data-sc="calLabel"></strong><span class="tag-example" data-sc="clickEvent"></span></div>
+            <div class="sc-scroll"><div class="sc-cal" id="scCal"></div></div>
+            <dl class="sc-detail" id="scEvDetail" aria-live="polite"></dl>
+          </div>
+        </div>
+      </li>
+      <li class="row">
+        <div class="row-head"><span class="num" data-sc="r3n"></span><h3 data-sc="r3"></h3><p data-sc="r3p"></p></div>
+        <div class="row-body">
+          <div class="sc-box">
+            <div class="sc-tabs" role="tablist" id="scArtTabs"></div>
+            <div id="scArt" role="tabpanel" style="display:grid;gap:12px;min-width:0"></div>
+          </div>
+        </div>
+      </li>
+      <li class="row">
+        <div class="row-head"><span class="num" data-sc="r5n"></span><h3 data-sc="r5"></h3><p data-sc="r5p"></p></div>
+        <div class="row-body">
+          <div class="wf"><div class="wf-top"><strong data-sc="wfLabel"></strong><span class="tag-example" data-sc="clickStep"></span></div>
+            <div class="sc-items" id="scWfItems"></div>
+            <ul class="sc-phases" id="scWfLegend"></ul>
+            <div class="sc-prog"><span id="scWfBar"></span></div>
+            <ol class="sc-wsteps" id="scWfSteps"></ol>
+            <div class="sc-rm">
+              <div class="sc-rmwrap">
+                <div class="sc-top"><strong data-sc="rmTitle"></strong><span class="sc-note" data-sc="rmHint"></span></div>
+                <div class="sc-scroll"><div class="sc-tl" id="scTl"></div></div>
+              </div>
+              <dl class="sc-wfd" id="scWfDetail" aria-live="polite"></dl>
+            </div>
+          </div>
+        </div>
+      </li>
+    </ol>
   </div>
 </section>
 
@@ -869,7 +1180,7 @@ button.thumb:hover img{transform:translateY(-4px)}
   function $(id){return document.getElementById(id);}
 
   /* ---------- Language ---------- */
-  var DE={
+  var DE=window.__kelDE={
     status:"Ab sofort verfügbar · offen für neue Aufgaben",eyebrow:"Portfolio · Arbeitsproben",
     role:"Prozess- &amp; Projektmanager · BI Analyst · IT-Projektmanager",
     intro:"Projekt- und Prozessmanager mit über 5 Jahren Erfahrung in der Analyse und Optimierung von Geschäftsprozessen und der Steuerung von IT- und Automotive-Projekten von der Planung bis zur Umsetzung. Hier finden Sie Beispiele meiner Arbeit. Alle Dokumente öffnen sich online und schreibgeschützt.",
@@ -882,7 +1193,7 @@ button.thumb:hover img{transform:translateY(-4px)}
     c3h:"Produktkosten um 13 % gesenkt durch Budgetsteuerung in 10+ internationalen Projekten",c3s:"10+ internationale Automotive-Softwareprojekte mit engen Budgets und Terminen.",c3a:"Budgetplanung, Kostenkontrolle und Soll-Ist-Vergleiche in der Projektsteuerung eingeführt.",c3r:"Produktkosten −13 %, Lieferzeit −18 %.",
     c4h:"Produktkosten um 10 % gesenkt durch strukturiertes Risikomanagement",c4s:"Risiken wurden spät erkannt und ohne einheitliche Methode behandelt.",c4a:"6 Risikomanagementprozesse durchgeführt: Risikolisten-Analyse, Risiko-Workshops und Risikomanagementplan; Beratung der Product Owner zu Maßnahmen.",c4r:"Produktkosten um 10 % gesenkt.",
     samplesH:"Arbeitsproben",samplesP:"Wählen Sie einen Bereich, um Vorlagen, Workflows und Dokumente zu sehen.",
-    pmName:"Projektmanagement",pmSub:"Beispiele nach Projektphase",prName:"Prozessmanagement",prSub:"Workflows und Beispiele je Prozess",
+    pmName:"Projektmanagement",pmSub:"Beispiele nach Projektphase",prName:"Prozessmanagement",prSub:"Workflows und Beispiele je Prozess",scName:"Scrum &amp; Agile",scSub:"Anonymisiertes Scrum-Projekt, interaktiv",
     ph1n:"Phase 1",ph1:"Initiierung",ph1p:"Projekt, Ziele und Beteiligte festlegen.",
     ph2n:"Phase 2",ph2:"Planung",ph2p:"Termine, Ressourcen, Budget und Risiken planen.",ph2e:"Projektpläne, Terminpläne und Budgetpläne.",
     ph3n:"Phase 3",ph3:"Durchführung &amp; Steuerung",ph3p:"Arbeit steuern, Fortschritt verfolgen, Status berichten.",ph3e:"Statusberichte, KPI-Dashboards und Protokolle.",
@@ -1158,7 +1469,7 @@ button.thumb:hover img{transform:translateY(-4px)}
   $('lang-de').addEventListener('click',function(){setLang('de');});
 
   /* ---------- Capability tabs ---------- */
-  var tabs=[$('tab-project'),$('tab-process')];
+  var tabs=[$('tab-project'),$('tab-process'),$('tab-scrum')];
   function show(id){tabs.forEach(function(tb){var on=tb.getAttribute('aria-controls')===id;tb.setAttribute('aria-selected',on?'true':'false');$(tb.getAttribute('aria-controls')).hidden=!on;});}
   tabs.forEach(function(tb){tb.addEventListener('click',function(){var id=tb.getAttribute('aria-controls');show(id);try{history.replaceState(null,'','#'+id);}catch(e){}});});
 
@@ -1250,9 +1561,465 @@ button.thumb:hover img{transform:translateY(-4px)}
   var saved='en';try{saved=localStorage.getItem('kel-lang')||'en';}catch(e){}
   setLang(saved==='de'?'de':'en');
   var h=(location.hash||'').slice(1);
-  if(h==='process'||h==='project'){show(h);$('samples').scrollIntoView({block:'start'});}
+  if(h==='process'||h==='project'||h==='scrum'){show(h);$('samples').scrollIntoView({block:'start'});}
 })();
 </script>
 
+<script>
+/* ---------- Scrum panel ---------- */
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function $(id){return document.getElementById(id);}
+  function L(){return document.documentElement.lang==='de'?'de':'en';}
+  function tr(o){return o==null?'':(typeof o==='string'?o:(o[L()]||o.en));}
+  function h(tag,cls,txt){var e=document.createElement(tag);if(cls)e.className=cls;if(txt!=null)e.textContent=txt;return e;}
+  function sv(tag,a,txt){var e=document.createElementNS(NS,tag);for(var k in a)e.setAttribute(k,a[k]);if(txt!=null)e.textContent=txt;return e;}
+
+  var T={
+    en:{
+      intro:"Anonymised project from my last role, where I worked as <b>Scrum Master and agile coach</b> for one development team of an infotainment HMI product (here called <b>Project Nova</b>). One Scrum Team, <b>2-week Sprints</b> and <b>PI Planning every quarter</b>. Click through the cadence, the events, the three artifacts and the item workflow.",
+      tagReal:"Real project · anonymised",tagEx:"Example figures",
+      chipSprint:"Sprint · 2 weeks",chipPi:"PI · 1 quarter = 6 Sprints",chipTeam:"Team · 1 PO · 1 SM · 7 Developers",
+      r1n:"Quarter · PI 3",r1:"Cadence",r1p:"One Program Increment per quarter: PI Planning, five delivery Sprints and one Innovation & Planning Sprint.",
+      r2n:"10 working days",r2:"Sprint events",r2p:"What happens inside one 2-week Sprint, with timebox, input, output and my role as Scrum Master.",
+      r3n:"3 artifacts · 3 commitments",r3:"Scrum artifacts",r3p:"Product Backlog, Sprint Backlog and Increment, each with its commitment. Try them out.",
+      r4n:"Situation · Action · Result",r4:"Situations I met",r4p:"Real situations from this project and how I solved them as Scrum Master. Click one to open it.",r5n:"Product Backlog → Increment",r5:"Item workflow",r5p:"Every step the three done items of Sprint 4 went through. Pick an item, then click a step.",wfLabel:"Workflow · done items of Sprint 4",rmTitle:"Roadmap · PI 3 Planning → Sprint 4 Review",rmHint:"Click a step on the timeline",clickStep:"Click a step",
+      piLabel:"PI 3 · July – September",clickSprint:"Click a Sprint",velH:"Velocity per Sprint (story points)",lgCommit:"Forecast",lgDone:"Done",lgAvg:"Average done",
+      calLabel:"Sprint 4 · 2 weeks",clickEvent:"Click an event",
+      scnLabel:"Scenario player",
+      goal:"Sprint Goal",pts:"Forecast → Done",out:"Outcome",when:"When",timebox:"Timebox",who:"Who",input:"Input",output:"Output",sm:"My role as Scrum Master",
+      wk:"Week",day:"Day",days:["Mon","Tue","Wed","Thu","Fri"],
+      tabPB:"Product Backlog",tabSB:"Sprint Backlog",tabInc:"Increment",
+      cPB:"Commitment · Product Goal",cSB:"Commitment · Sprint Goal",cInc:"Commitment · Definition of Done",
+      productGoal:"Drivers control media, phone, navigation and climate by voice and touch on the new HMI platform by release 3.0.",
+      pbNote:"Ordered by the Product Owner. Click an item to see the user story and acceptance criteria.",
+      story:"User story",ac:"Acceptance criteria",ready:"Ready",refining:"Refining",newSt:"New",
+      sbNote:"Sprint 4, day 6. Click a card to move it to the next column. The burndown updates.",
+      todo:"To do",doing:"In progress",done:"Done",reset:"Reset board",
+      bdH:"Sprint burndown (points left)",ideal:"Ideal",today:"today",
+      onTrack:"On track for the Sprint Goal",behind:"Behind the ideal line: raise it in the Daily Scrum",
+      incNote:"Only work that meets the Definition of Done is part of the Increment. Click a criterion to check it.",
+      dodMet:"criteria met",releasable:"Increment is usable and releasable",notRel:"Not done: these items go back to the Product Backlog",
+      incItems:"Done items in this Increment",noItems:"No items done yet. Move cards to Done in the Sprint Backlog.",
+      start:"Situation",next:"What happens next",choose:"What do you do?",
+      q:{good:"Scrum-aligned",ok:"Workable, with a cost",bad:"Anti-pattern"},
+      resTitle:"Result of your path",resText:{good:"Every step follows the Scrum Guide. This is how I handled it as Scrum Master.",ok:"You got through, but with avoidable cost. Try the other path to compare.",bad:"This path breaks a Scrum rule. Go back one step or restart to find a better route."},
+      back:"Back one step",restart:"Restart scenario",tracker:"Path tracker",map:"Scenario map",yourPath:"Your path",
+      scoreTxt:function(n,m,g){return n+" of "+m+" scenarios played · "+g+" Scrum-aligned";},
+      scaling:"Scaling (SAFe) · not part of the Scrum Guide",ip:"IP",ipLong:"Innovation & Planning",piPlan:"PI Planning",ia:"Inspect & Adapt",sp:"Sprint"
+    },
+    de:{
+      intro:"Anonymisiertes Projekt aus meiner letzten Rolle, in der ich als <b>Scrum Master und Agile Coach</b> ein Entwicklungsteam eines Infotainment-HMI-Produkts begleitet habe (hier <b>Projekt Nova</b>). Ein Scrum Team, <b>2-Wochen-Sprints</b> und <b>PI Planning jedes Quartal</b>. Klicken Sie sich durch Takt, Events, die drei Artefakte und den Ablauf der Einträge.",
+      tagReal:"Echtes Projekt · anonymisiert",tagEx:"Beispielzahlen",
+      chipSprint:"Sprint · 2 Wochen",chipPi:"PI · 1 Quartal = 6 Sprints",chipTeam:"Team · 1 PO · 1 SM · 7 Developer",
+      r1n:"Quartal · PI 3",r1:"Takt",r1p:"Ein Program Increment je Quartal: PI Planning, fünf Liefer-Sprints und ein Innovation-&-Planning-Sprint.",
+      r2n:"10 Arbeitstage",r2:"Sprint-Events",r2p:"Was in einem 2-Wochen-Sprint passiert, mit Timebox, Eingang, Ergebnis und meiner Rolle als Scrum Master.",
+      r3n:"3 Artefakte · 3 Commitments",r3:"Scrum-Artefakte",r3p:"Product Backlog, Sprint Backlog und Increment, jeweils mit Commitment. Probieren Sie sie aus.",
+      r4n:"Ausgangslage · Vorgehen · Ergebnis",r4:"Erlebte Situationen",r4p:"Echte Situationen aus diesem Projekt und wie ich sie als Scrum Master gelöst habe. Zum Öffnen anklicken.",r5n:"Product Backlog → Increment",r5:"Ablauf der Einträge",r5p:"Jeder Schritt, den die drei erledigten Einträge aus Sprint 4 durchlaufen haben. Eintrag wählen, dann Schritt anklicken.",wfLabel:"Workflow · erledigte Einträge Sprint 4",rmTitle:"Roadmap · PI-3-Planning → Sprint-4-Review",rmHint:"Schritt in der Zeitleiste anklicken",clickStep:"Schritt anklicken",
+      piLabel:"PI 3 · Juli – September",clickSprint:"Sprint anklicken",velH:"Velocity je Sprint (Story Points)",lgCommit:"Prognose",lgDone:"Erledigt",lgAvg:"Durchschnitt erledigt",
+      calLabel:"Sprint 4 · 2 Wochen",clickEvent:"Event anklicken",
+      scnLabel:"Szenario-Player",
+      goal:"Sprint Goal",pts:"Prognose → Erledigt",out:"Ergebnis",when:"Wann",timebox:"Timebox",who:"Wer",input:"Eingang",output:"Ergebnis",sm:"Meine Rolle als Scrum Master",
+      wk:"Woche",day:"Tag",days:["Mo","Di","Mi","Do","Fr"],
+      tabPB:"Product Backlog",tabSB:"Sprint Backlog",tabInc:"Increment",
+      cPB:"Commitment · Product Goal",cSB:"Commitment · Sprint Goal",cInc:"Commitment · Definition of Done",
+      productGoal:"Fahrer steuern Medien, Telefon, Navigation und Klima per Sprache und Touch auf der neuen HMI-Plattform bis Release 3.0.",
+      pbNote:"Vom Product Owner geordnet. Klicken Sie auf einen Eintrag für User Story und Akzeptanzkriterien.",
+      story:"User Story",ac:"Akzeptanzkriterien",ready:"Ready",refining:"In Refinement",newSt:"Neu",
+      sbNote:"Sprint 4, Tag 6. Klicken Sie auf eine Karte, um sie in die nächste Spalte zu schieben. Der Burndown passt sich an.",
+      todo:"Offen",doing:"In Arbeit",done:"Erledigt",reset:"Board zurücksetzen",
+      bdH:"Sprint-Burndown (offene Punkte)",ideal:"Ideal",today:"heute",
+      onTrack:"Auf Kurs für das Sprint Goal",behind:"Hinter der Ideallinie: im Daily Scrum ansprechen",
+      incNote:"Nur Arbeit, die die Definition of Done erfüllt, gehört zum Increment. Klicken Sie ein Kriterium zum Abhaken.",
+      dodMet:"Kriterien erfüllt",releasable:"Increment ist nutzbar und lieferbar",notRel:"Nicht fertig: diese Einträge gehen zurück ins Product Backlog",
+      incItems:"Erledigte Einträge in diesem Increment",noItems:"Noch nichts erledigt. Schieben Sie Karten im Sprint Backlog auf Erledigt.",
+      start:"Situation",next:"Wie es weitergeht",choose:"Was tun Sie?",
+      q:{good:"Scrum-konform",ok:"Machbar, mit Folgen",bad:"Anti-Pattern"},
+      resTitle:"Ergebnis Ihres Pfads",resText:{good:"Jeder Schritt folgt dem Scrum Guide. So habe ich es als Scrum Master gelöst.",ok:"Sie kommen durch, aber mit vermeidbaren Kosten. Vergleichen Sie mit dem anderen Pfad.",bad:"Dieser Pfad verletzt eine Scrum-Regel. Gehen Sie einen Schritt zurück oder starten Sie neu."},
+      back:"Einen Schritt zurück",restart:"Szenario neu starten",tracker:"Pfad-Tracker",map:"Szenario-Karte",yourPath:"Ihr Pfad",
+      scoreTxt:function(n,m,g){return n+" von "+m+" Szenarien gespielt · "+g+" Scrum-konform";},
+      scaling:"Skalierung (SAFe) · nicht Teil des Scrum Guide",ip:"IP",ipLong:"Innovation & Planning",piPlan:"PI Planning",ia:"Inspect & Adapt",sp:"Sprint"
+    }
+  };
+  function t(k){return T[L()][k];}
+
+  /* ---------- Data ---------- */
+  var SPRINTS=[
+    {id:"S1",w:"1–2",c:34,d:31,goal:{en:"Drivers can pair a phone over Bluetooth in the new setup wizard.",de:"Fahrer koppeln ein Telefon per Bluetooth im neuen Einrichtungsassistenten."},out:{en:"Goal met. One edge case (second phone) moved back to the Product Backlog.",de:"Ziel erreicht. Ein Sonderfall (zweites Telefon) ging zurück ins Product Backlog."}},
+    {id:"S2",w:"3–4",c:36,d:36,goal:{en:"Media player plays streaming sources with cover art.",de:"Der Mediaplayer spielt Streaming-Quellen mit Cover-Bild ab."},out:{en:"Goal met. All forecast items done.",de:"Ziel erreicht. Alle prognostizierten Einträge erledigt."}},
+    {id:"S3",w:"5–6",c:38,d:29,goal:{en:"Navigation search returns results offline.",de:"Die Navigationssuche liefert offline Ergebnisse."},out:{en:"Goal partly met: an API from another team arrived late. Dependency handled in scenario 5.",de:"Ziel teilweise erreicht: eine API eines anderen Teams kam zu spät. Abhängigkeit siehe Szenario 5."}},
+    {id:"S4",w:"7–8",c:35,d:35,goal:{en:"The voice assistant handles the ten core commands.",de:"Der Sprachassistent versteht die zehn Kernbefehle."},out:{en:"Goal met. This is the Sprint shown in the artifacts below.",de:"Ziel erreicht. Dieser Sprint ist unten in den Artefakten zu sehen."}},
+    {id:"S5",w:"9–10",c:37,d:36,goal:{en:"The release candidate passes the full regression suite.",de:"Der Release Candidate besteht die komplette Regression."},out:{en:"Goal met. Release 2.4 shipped to the client.",de:"Ziel erreicht. Release 2.4 an den Kunden geliefert."}},
+    {id:"S6",w:"11–12",ip:true,goal:{en:"Innovation & Planning: pay down technical debt, hackathon, prepare PI 4.",de:"Innovation & Planning: technische Schulden abbauen, Hackathon, PI 4 vorbereiten."},out:{en:"No feature forecast. Buffer for the PI objectives, then Inspect & Adapt and PI Planning for the next quarter.",de:"Keine Feature-Prognose. Puffer für die PI-Ziele, danach Inspect & Adapt und PI Planning für das nächste Quartal."}}
+  ];
+  var EV={
+    pi:{c:"--g5",scale:true,n:{en:"PI Planning",de:"PI Planning"},when:{en:"Start of each quarter, before Sprint 1",de:"Zu Beginn jedes Quartals, vor Sprint 1"},tb:{en:"2 days",de:"2 Tage"},who:{en:"All teams of the release train, business owners, POs, SMs",de:"Alle Teams des Release Trains, Business Owner, POs, SMs"},in:{en:"Vision, top features, team capacity, last PI results",de:"Vision, Top-Features, Teamkapazität, Ergebnisse des letzten PI"},out:{en:"PI objectives, program board with dependencies, risks (ROAM)",de:"PI-Ziele, Program Board mit Abhängigkeiten, Risiken (ROAM)"},sm:{en:"Prepared the team's capacity per Sprint, facilitated the team breakouts and made dependencies visible.",de:"Teamkapazität je Sprint vorbereitet, Team-Breakouts moderiert und Abhängigkeiten sichtbar gemacht."}},
+    plan:{c:"--g1",n:{en:"Sprint Planning",de:"Sprint Planning"},when:{en:"Day 1, morning",de:"Tag 1, vormittags"},tb:{en:"Max. 4 h for a 2-week Sprint (8 h for one month)",de:"Max. 4 h bei 2-Wochen-Sprint (8 h bei einem Monat)"},who:{en:"Whole Scrum Team",de:"Gesamtes Scrum Team"},in:{en:"Product Goal, ordered Product Backlog, latest Increment, capacity, past velocity",de:"Product Goal, geordnetes Product Backlog, letztes Increment, Kapazität, bisherige Velocity"},out:{en:"Sprint Goal, selected items and a plan: the Sprint Backlog",de:"Sprint Goal, ausgewählte Einträge und ein Plan: das Sprint Backlog"},sm:{en:"Made sure it happened within the timebox and coached the team on the three topics: why, what and how.",de:"Sichergestellt, dass es in der Timebox stattfindet, und das Team zu den drei Themen Warum, Was und Wie gecoacht."}},
+    daily:{c:"--g2",n:{en:"Daily Scrum",de:"Daily Scrum"},when:{en:"Every working day, 09:15, same place",de:"Jeden Arbeitstag, 09:15 Uhr, gleicher Ort"},tb:{en:"15 min",de:"15 Min."},who:{en:"Developers (PO and SM join if they work on Sprint Backlog items)",de:"Developer (PO und SM nur, wenn sie an Einträgen arbeiten)"},in:{en:"Sprint Backlog, burndown, progress toward the Sprint Goal",de:"Sprint Backlog, Burndown, Fortschritt zum Sprint Goal"},out:{en:"Adapted plan for the next day, impediments made visible",de:"Angepasster Plan für den nächsten Tag, sichtbare Hindernisse"},sm:{en:"Made sure it took place and taught the team to keep it within 15 minutes. Removed impediments afterwards.",de:"Sichergestellt, dass es stattfindet, und dem Team beigebracht, 15 Minuten einzuhalten. Hindernisse danach beseitigt."}},
+    ref:{c:"--g6",n:{en:"Backlog Refinement",de:"Backlog Refinement"},when:{en:"Ongoing; fixed slot on day 6",de:"Laufend; fester Termin an Tag 6"},tb:{en:"About 90 min (an activity, not a Scrum event)",de:"Ca. 90 Min. (eine Aktivität, kein Scrum-Event)"},who:{en:"Product Owner and Developers",de:"Product Owner und Developer"},in:{en:"New and rough Product Backlog items",de:"Neue und grobe Product-Backlog-Einträge"},out:{en:"Smaller, clearer items with estimates that are ready for a coming Sprint",de:"Kleinere, klare, geschätzte Einträge, bereit für einen der nächsten Sprints"},sm:{en:"Introduced story splitting and Planning Poker, and helped the PO write clear acceptance criteria.",de:"Story Splitting und Planning Poker eingeführt und dem PO bei klaren Akzeptanzkriterien geholfen."}},
+    review:{c:"--g4",n:{en:"Sprint Review",de:"Sprint Review"},when:{en:"Day 10, morning",de:"Tag 10, vormittags"},tb:{en:"Max. 2 h for a 2-week Sprint (4 h for one month)",de:"Max. 2 h bei 2-Wochen-Sprint (4 h bei einem Monat)"},who:{en:"Scrum Team and key stakeholders",de:"Scrum Team und wichtige Stakeholder"},in:{en:"The Increment, progress toward the Product Goal",de:"Das Increment, Fortschritt zum Product Goal"},out:{en:"Feedback and an adjusted Product Backlog",de:"Feedback und ein angepasstes Product Backlog"},sm:{en:"Turned it from a demo into a working session with the stakeholders on the real HMI hardware.",de:"Aus einer Demo eine Arbeitssitzung mit den Stakeholdern an der echten HMI-Hardware gemacht."}},
+    retro:{c:"--g3",n:{en:"Sprint Retrospective",de:"Sprint Retrospektive"},when:{en:"Day 10, after the Review",de:"Tag 10, nach dem Review"},tb:{en:"Max. 1.5 h for a 2-week Sprint (3 h for one month)",de:"Max. 1,5 h bei 2-Wochen-Sprint (3 h bei einem Monat)"},who:{en:"Scrum Team",de:"Scrum Team"},in:{en:"How the last Sprint went: people, interactions, processes, tools, Definition of Done",de:"Wie der Sprint lief: Menschen, Zusammenarbeit, Prozesse, Werkzeuge, Definition of Done"},out:{en:"The most helpful improvements; one goes into the next Sprint Backlog",de:"Die wirksamsten Verbesserungen; eine kommt ins nächste Sprint Backlog"},sm:{en:"Facilitated with changing formats (Starfish, Sailboat, 4L) and kept a safe space for open feedback.",de:"Mit wechselnden Formaten (Starfish, Sailboat, 4L) moderiert und einen geschützten Raum für offenes Feedback gehalten."}},
+    ia:{c:"--g5",scale:true,n:{en:"Inspect & Adapt",de:"Inspect & Adapt"},when:{en:"End of each quarter, in the IP Sprint",de:"Ende jedes Quartals, im IP-Sprint"},tb:{en:"Half a day",de:"Ein halber Tag"},who:{en:"All teams of the release train and stakeholders",de:"Alle Teams des Release Trains und Stakeholder"},in:{en:"PI demo, PI objectives achieved vs. planned, metrics",de:"PI-Demo, erreichte vs. geplante PI-Ziele, Kennzahlen"},out:{en:"Improvement backlog items for the next PI",de:"Verbesserungs-Einträge für das nächste PI"},sm:{en:"Ran the problem-solving workshop for our team with root-cause analysis (5 Why, Ishikawa).",de:"Problemlösungs-Workshop für unser Team mit Ursachenanalyse (5 Why, Ishikawa) moderiert."}}
+  };
+  var CAL=[["plan","daily"],["daily"],["daily"],["daily"],["daily"],["daily","ref"],["daily"],["daily"],["daily"],["daily","review","retro"]];
+
+  var PBL=[
+    {id:"NOVA-142",p:5,st:"ready",t:{en:"Voice: seat heating on/off",de:"Sprache: Sitzheizung an/aus"},s:{en:"As a driver, I want to switch seat heating by voice so that I keep my hands on the wheel. Split from “Climate control by voice”.",de:"Als Fahrer möchte ich die Sitzheizung per Sprache schalten, damit meine Hände am Lenkrad bleiben. Abgeteilt von „Klimasteuerung per Sprache“."},a:{en:["Three levels and off, for driver and passenger","Confirms the level by voice and on screen","Works with the climate ECU on target hardware"],de:["Drei Stufen und aus, für Fahrer und Beifahrer","Bestätigt die Stufe per Sprache und auf dem Display","Funktioniert mit dem Klima-Steuergerät auf Zielhardware"]}},
+    {id:"NOVA-151",p:5,st:"ready",t:{en:"Navigation: offline POI search",de:"Navigation: Offline-POI-Suche"},s:{en:"As a driver, I want to find fuel stations without mobile data so that I can plan stops anywhere.",de:"Als Fahrer möchte ich Tankstellen ohne Mobilfunk finden, damit ich überall Stopps planen kann."},a:{en:["Results within 2 s from local map data","Sorted by distance along the route"],de:["Ergebnisse in 2 s aus lokalen Kartendaten","Nach Entfernung entlang der Route sortiert"]}},
+    {id:"NOVA-133",p:3,st:"ready",t:{en:"Phone: favourites on home screen",de:"Telefon: Favoriten auf dem Startbildschirm"},s:{en:"As a driver, I want my three favourite contacts on the home screen so that I can call with one tap.",de:"Als Fahrer möchte ich drei Lieblingskontakte auf dem Startbildschirm, damit ich mit einem Tipp anrufen kann."},a:{en:["Max. three favourites","Synced from the paired phone"],de:["Max. drei Favoriten","Vom gekoppelten Telefon synchronisiert"]}},
+    {id:"NOVA-160",p:13,st:"ref",t:{en:"Media: podcast playback",de:"Medien: Podcast-Wiedergabe"},s:{en:"As a passenger, I want to continue podcasts from my phone so that I don't lose my place.",de:"Als Beifahrer möchte ich Podcasts vom Telefon fortsetzen, damit ich die Stelle nicht verliere."},a:{en:["Resumes at the last position","To be split in the next refinement (13 points is too large)"],de:["Setzt an der letzten Position fort","Wird im nächsten Refinement geteilt (13 Punkte sind zu groß)"]}},
+    {id:"NOVA-118",p:5,st:"ref",t:{en:"Settings: night mode schedule",de:"Einstellungen: Nachtmodus-Zeitplan"},s:{en:"As a driver, I want night mode to switch on at sunset so that the screen does not dazzle me.",de:"Als Fahrer möchte ich, dass der Nachtmodus bei Sonnenuntergang startet, damit mich der Bildschirm nicht blendet."},a:{en:["Uses GPS time and position","Manual override stays possible"],de:["Nutzt GPS-Zeit und -Position","Manuelles Umschalten bleibt möglich"]}},
+    {id:"NOVA-171",p:8,st:"new",t:{en:"Accessibility: larger font option",de:"Barrierefreiheit: größere Schrift"},s:{en:"As a driver with weak eyesight, I want larger text so that I can read the menus at a glance.",de:"Als Fahrer mit schwacher Sehkraft möchte ich größere Schrift, damit ich Menüs auf einen Blick lese."},a:{en:["Acceptance criteria still open"],de:["Akzeptanzkriterien noch offen"]}}
+  ];
+  var CARDS=[
+    {id:"VA-101",p:5,t:{en:"Wake-word detection",de:"Wake-Word-Erkennung"},c:1},
+    {id:"VA-102",p:3,t:{en:"Command: call contact",de:"Befehl: Kontakt anrufen"},c:2},
+    {id:"VA-103",p:3,t:{en:"Command: navigate home",de:"Befehl: nach Hause navigieren"},c:2},
+    {id:"VA-104",p:5,t:{en:"Command: play radio station",de:"Befehl: Radiosender abspielen"},c:1},
+    {id:"VA-105",p:5,t:{en:"Command: set temperature",de:"Befehl: Temperatur einstellen"},c:2},
+    {id:"VA-106",p:3,t:{en:"Error prompt and fallback",de:"Fehlermeldung und Fallback"},c:0},
+    {id:"VA-107",p:5,t:{en:"Voice settings menu",de:"Menü Spracheinstellungen"},c:0},
+    {id:"VA-108",p:6,t:{en:"Regression tests for voice",de:"Regressionstests Sprache"},c:0}
+  ];
+  var CARD0=CARDS.map(function(c){return c.c;});
+  var HIST=[35,35,33,30,27,24];
+  var DOD=[
+    {t:{en:"Code reviewed by a second developer",de:"Code von zweitem Developer reviewt"},v:true},
+    {t:{en:"Unit tests pass, coverage ≥ 80 %",de:"Unit-Tests grün, Abdeckung ≥ 80 %"},v:true},
+    {t:{en:"Integration test on HMI target hardware",de:"Integrationstest auf HMI-Zielhardware"},v:true},
+    {t:{en:"Acceptance criteria met",de:"Akzeptanzkriterien erfüllt"},v:true},
+    {t:{en:"No open critical or major defects",de:"Keine offenen kritischen oder schweren Fehler"},v:true},
+    {t:{en:"User documentation updated",de:"Benutzerdokumentation aktualisiert"},v:false},
+    {t:{en:"Merged to main, nightly build green",de:"In main gemergt, Nightly-Build grün"},v:false}
+  ];
+
+  /* Workflow of the done items: Product Backlog → Increment */
+  var WITEMS=[
+    {id:"VA-102",p:3,t:{en:"Command: call contact",de:"Befehl: Kontakt anrufen"}},
+    {id:"VA-103",p:3,t:{en:"Command: navigate home",de:"Befehl: nach Hause navigieren"}},
+    {id:"VA-105",p:5,t:{en:"Command: set temperature",de:"Befehl: Temperatur einstellen"}}
+  ];
+  var PHASES=[
+    {k:"pb",c:"--g6",n:{en:"Product Backlog",de:"Product Backlog"}},
+    {k:"plan",c:"--g1",n:{en:"Sprint Planning",de:"Sprint Planning"}},
+    {k:"build",c:"--g2",n:{en:"Build & test",de:"Bauen & testen"}},
+    {k:"done",c:"--g4",n:{en:"Done",de:"Done"}},
+    {k:"inc",c:"--g3",n:{en:"Increment",de:"Increment"}}
+  ];
+  var STEP_PHASE=[0,0,0,1,2,2,2,3,4];
+  var ITEM_C={"VA-102":"--g5","VA-103":"--g1","VA-105":"--g3"};
+  var SHORT=[{en:"Backlog entry",de:"Backlog-Eintrag"},{en:"Refinement",de:"Refinement"},{en:"Estimation",de:"Schätzung"},{en:"Sprint Planning",de:"Sprint Planning"},{en:"Development",de:"Entwicklung"},{en:"Code review",de:"Code-Review"},{en:"Integration test",de:"Integrationstest"},{en:"DoD check",de:"DoD-Prüfung"},{en:"Review & Increment",de:"Review & Increment"}];
+  var TLROWS=[
+    {a:{en:"PI 3",de:"PI 3"},b:{en:"PI Planning",de:"PI Planning"}},
+    {a:{en:"Sprint 3",de:"Sprint 3"},b:{en:"Day 6 · Mon",de:"Tag 6 · Mo"}},
+    {a:{en:"Sprint 4",de:"Sprint 4"},b:{en:"Day 1 · Mon",de:"Tag 1 · Mo"},sb:true},
+    {b:{en:"Day 2 · Tue",de:"Tag 2 · Di"}},
+    {b:{en:"Day 3 · Wed",de:"Tag 3 · Mi"}},
+    {b:{en:"Day 4 · Thu",de:"Tag 4 · Do"}},
+    {b:{en:"Day 5 · Fri",de:"Tag 5 · Fr"}},
+    {b:{en:"Day 6 · Mon",de:"Tag 6 · Mo"}},
+    {b:{en:"Days 7–9",de:"Tage 7–9"}},
+    {b:{en:"Day 10 · Fri",de:"Tag 10 · Fr"}}
+  ];
+  /* rows in which each step happened, per item (index = step) */
+  var SCHED={
+    "VA-102":[[0],[1],[1],[2],[2,3,4],[4],[5],[5],[9]],
+    "VA-103":[[0],[1],[1],[2],[2,3],[4],[5],[5],[9]],
+    "VA-105":[[0],[1],[1],[2],[3,4,5],[6],[6],[7],[9]]
+  };
+  var WSTEPS=[
+    {n:{en:"Backlog entry",de:"Backlog-Eintrag"},in:{en:"Product Goal, PI objective “voice control for core functions”, stakeholder input",de:"Product Goal, PI-Ziel „Sprachsteuerung der Kernfunktionen“, Stakeholder-Input"},out:{en:"Product Backlog item with a user story, linked to the epic",de:"Product-Backlog-Eintrag mit User Story, mit dem Epic verknüpft"},who:{en:"Product Owner",de:"Product Owner"},tool:"Jira",
+     it:{"VA-102":{w:{en:"PI 3 Planning",de:"PI-3-Planning"},x:{en:"Created from the epic “Voice assistant core commands”. Story: as a driver I want to call a contact by voice so that I keep my eyes on the road.",de:"Aus dem Epic „Kernbefehle Sprachassistent“ erstellt. Story: Als Fahrer möchte ich Kontakte per Sprache anrufen, damit mein Blick auf der Straße bleibt."}},
+         "VA-103":{w:{en:"PI 3 Planning",de:"PI-3-Planning"},x:{en:"Created from the same epic. Story: as a driver I want to start navigation home by voice so that I don't type while driving.",de:"Aus demselben Epic erstellt. Story: Als Fahrer möchte ich die Navigation nach Hause per Sprache starten, damit ich während der Fahrt nicht tippe."}},
+         "VA-105":{w:{en:"PI 3 Planning",de:"PI-3-Planning"},x:{en:"Started as one large item “Climate control by voice” (13 points), too big for one Sprint.",de:"Startete als großer Eintrag „Klimasteuerung per Sprache“ (13 Punkte), zu groß für einen Sprint."}}}},
+    {n:{en:"Refinement",de:"Refinement"},in:{en:"Rough backlog item, technical questions",de:"Grober Eintrag, technische Fragen"},out:{en:"Small, clear item with acceptance criteria, status Ready",de:"Kleiner, klarer Eintrag mit Akzeptanzkriterien, Status Ready"},who:{en:"PO and Developers; I facilitated",de:"PO und Developer; ich habe moderiert"},tool:"Jira, Confluence",
+     it:{"VA-102":{w:{en:"Sprint 3, day 6",de:"Sprint 3, Tag 6"},x:{en:"Acceptance criteria: “Call <name>” recognised in 95 % of test phrases, asks which number when a contact has several, works with the paired phone only.",de:"Akzeptanzkriterien: „Rufe <Name> an“ in 95 % der Testsätze erkannt, fragt nach der Nummer bei mehreren, nur mit gekoppeltem Telefon."}},
+         "VA-103":{w:{en:"Sprint 3, day 6",de:"Sprint 3, Tag 6"},x:{en:"Clarified the fallback: if no home address is saved, the assistant asks to set one. Route starts within 3 seconds.",de:"Fallback geklärt: Ist keine Heimadresse gespeichert, fragt der Assistent danach. Route startet innerhalb von 3 Sekunden."}},
+         "VA-105":{w:{en:"Sprint 3, day 6",de:"Sprint 3, Tag 6"},x:{en:"Split by story splitting into “set temperature” (VA-105) and “seat heating” (NOVA-142). Criteria: 16–28 °C in 0.5 °C steps, driver and passenger zone, confirmation by voice and on screen.",de:"Per Story Splitting geteilt in „Temperatur einstellen“ (VA-105) und „Sitzheizung“ (NOVA-142). Kriterien: 16–28 °C in 0,5-°C-Schritten, Fahrer- und Beifahrerzone, Bestätigung per Sprache und Display."}}}},
+    {n:{en:"Estimation",de:"Schätzung"},in:{en:"Ready item with acceptance criteria",de:"Ready-Eintrag mit Akzeptanzkriterien"},out:{en:"Story points agreed by the Developers",de:"Von den Developern vereinbarte Story Points"},who:{en:"Developers",de:"Developer"},tool:{en:"Planning Poker (Jira plugin)",de:"Planning Poker (Jira-Plugin)"},
+     it:{"VA-102":{w:{en:"Sprint 3, day 6",de:"Sprint 3, Tag 6"},x:{en:"3 points in the first round.",de:"3 Punkte in der ersten Runde."}},
+         "VA-103":{w:{en:"Sprint 3, day 6",de:"Sprint 3, Tag 6"},x:{en:"3 points; reuses the route engine from the navigation team.",de:"3 Punkte; nutzt die Routen-Engine des Navigationsteams."}},
+         "VA-105":{w:{en:"Sprint 3, day 6",de:"Sprint 3, Tag 6"},x:{en:"First votes ranged from 3 to 13. The CAN interface to the climate unit was the unknown; after a short talk the team agreed on 5.",de:"Erste Stimmen lagen zwischen 3 und 13. Die CAN-Schnittstelle zum Klimasteuergerät war die Unbekannte; nach kurzer Diskussion einigte sich das Team auf 5."}}}},
+    {n:{en:"Sprint Planning",de:"Sprint Planning"},in:{en:"Ordered Product Backlog, capacity (35 points), Sprint Goal draft",de:"Geordnetes Product Backlog, Kapazität (35 Punkte), Entwurf Sprint Goal"},out:{en:"Item in the Sprint Backlog, broken into tasks",de:"Eintrag im Sprint Backlog, in Tasks zerlegt"},who:{en:"Scrum Team",de:"Scrum Team"},tool:"Jira",
+     it:{"VA-102":{w:{en:"Sprint 4, day 1",de:"Sprint 4, Tag 1"},x:{en:"Selected for the Sprint Goal “voice assistant handles the ten core commands”. Tasks: intent model, contact lookup, number picker dialog.",de:"Für das Sprint Goal „Sprachassistent versteht die zehn Kernbefehle“ ausgewählt. Tasks: Intent-Modell, Kontaktsuche, Dialog zur Nummernauswahl."}},
+         "VA-103":{w:{en:"Sprint 4, day 1",de:"Sprint 4, Tag 1"},x:{en:"Tasks: intent model, call to the route engine, fallback dialog.",de:"Tasks: Intent-Modell, Aufruf der Routen-Engine, Fallback-Dialog."}},
+         "VA-105":{w:{en:"Sprint 4, day 1",de:"Sprint 4, Tag 1"},x:{en:"Tasks: intent model with numbers, CAN message to the climate unit, on-screen confirmation, zone handling.",de:"Tasks: Intent-Modell mit Zahlen, CAN-Nachricht ans Klimasteuergerät, Bestätigung auf dem Display, Zonenlogik."}}}},
+    {n:{en:"Development",de:"Entwicklung"},in:{en:"Tasks, acceptance criteria",de:"Tasks, Akzeptanzkriterien"},out:{en:"Code on a feature branch with unit tests",de:"Code auf Feature-Branch mit Unit-Tests"},who:{en:"Developers; progress checked in each Daily Scrum",de:"Developer; Fortschritt in jedem Daily Scrum geprüft"},tool:"Git, IDE, Jira board",
+     it:{"VA-102":{w:{en:"Days 1–3",de:"Tage 1–3"},x:{en:"Built in pair programming. Day 2 impediment: no test phone on the bench. I got one from the test lab the same day.",de:"Im Pair Programming gebaut. Hindernis an Tag 2: kein Testtelefon am Prüfstand. Ich habe noch am selben Tag eines aus dem Testlabor besorgt."}},
+         "VA-103":{w:{en:"Days 1–2",de:"Tage 1–2"},x:{en:"Smooth; the route engine API was already stable.",de:"Reibungslos; die API der Routen-Engine war bereits stabil."}},
+         "VA-105":{w:{en:"Days 2–4",de:"Tage 2–4"},x:{en:"Raised in the Daily Scrum on day 3: CAN signal spec unclear. A 15-minute talk with the climate team after the Daily solved it.",de:"Im Daily Scrum an Tag 3 angesprochen: CAN-Signalspezifikation unklar. Ein 15-Minuten-Gespräch mit dem Klimateam nach dem Daily löste es."}}}},
+    {n:{en:"Code review & unit tests",de:"Code-Review & Unit-Tests"},in:{en:"Pull request",de:"Pull Request"},out:{en:"Reviewed code merged to main, coverage ≥ 80 %",de:"Reviewter Code in main gemergt, Abdeckung ≥ 80 %"},who:{en:"Second developer (review pair)",de:"Zweiter Developer (Review-Paar)"},tool:"Bitbucket, Jenkins",
+     it:{"VA-102":{w:{en:"Day 3",de:"Tag 3"},x:{en:"Approved in the first round, coverage 86 %.",de:"In der ersten Runde freigegeben, Abdeckung 86 %."}},
+         "VA-103":{w:{en:"Day 3",de:"Tag 3"},x:{en:"One finding (missing timeout), fixed within an hour; coverage 82 %.",de:"Ein Befund (fehlender Timeout), innerhalb einer Stunde behoben; Abdeckung 82 %."}},
+         "VA-105":{w:{en:"Day 5",de:"Tag 5"},x:{en:"Review found missing rounding to 0.5 °C steps; fixed the same day, coverage 84 %.",de:"Review fand fehlende Rundung auf 0,5-°C-Schritte; am selben Tag behoben, Abdeckung 84 %."}}}},
+    {n:{en:"Integration test",de:"Integrationstest"},in:{en:"Nightly build, test cases",de:"Nightly-Build, Testfälle"},out:{en:"Passed test runs on HMI target hardware",de:"Bestandene Testläufe auf HMI-Zielhardware"},who:{en:"Developers with the test team",de:"Developer mit dem Testteam"},tool:"Polarion, HMI test bench",
+     it:{"VA-102":{w:{en:"Day 4",de:"Tag 4"},x:{en:"Tested with three phone models (iOS and Android); 96 % of test phrases recognised.",de:"Mit drei Telefonmodellen getestet (iOS und Android); 96 % der Testsätze erkannt."}},
+         "VA-103":{w:{en:"Day 4",de:"Tag 4"},x:{en:"Route started in 2.1 seconds on average; fallback tested without saved address.",de:"Route startete im Schnitt nach 2,1 Sekunden; Fallback ohne gespeicherte Adresse getestet."}},
+         "VA-105":{w:{en:"Day 5",de:"Tag 5"},x:{en:"Tested with the real climate unit over CAN, both zones, all 25 temperature steps.",de:"Mit echtem Klimasteuergerät über CAN getestet, beide Zonen, alle 25 Temperaturstufen."}}}},
+    {n:{en:"PO check & DoD",de:"PO-Prüfung & DoD"},in:{en:"Tested item, Definition of Done checklist",de:"Getesteter Eintrag, Checkliste Definition of Done"},out:{en:"Item meets all 7 DoD criteria, status Done",de:"Eintrag erfüllt alle 7 DoD-Kriterien, Status Done"},who:{en:"Developers check the DoD; PO confirms the acceptance criteria",de:"Developer prüfen die DoD; PO bestätigt die Akzeptanzkriterien"},tool:"Jira, Confluence",
+     it:{"VA-102":{w:{en:"Day 4",de:"Tag 4"},x:{en:"Done on day 4. User guide section “Voice calls” updated.",de:"An Tag 4 Done. Abschnitt „Sprachanrufe“ im Handbuch aktualisiert."}},
+         "VA-103":{w:{en:"Day 4",de:"Tag 4"},x:{en:"Done on day 4.",de:"An Tag 4 Done."}},
+         "VA-105":{w:{en:"Day 6, morning",de:"Tag 6, morgens"},x:{en:"Done on day 6, which is why it sits in the Done column of the Sprint Backlog above.",de:"An Tag 6 Done, deshalb steht es oben im Sprint Backlog in der Spalte Erledigt."}}}},
+    {n:{en:"Sprint Review & Increment",de:"Sprint Review & Increment"},in:{en:"Done items",de:"Erledigte Einträge"},out:{en:"Part of the Increment, stakeholder feedback in the Product Backlog",de:"Teil des Increments, Stakeholder-Feedback im Product Backlog"},who:{en:"Scrum Team and stakeholders",de:"Scrum Team und Stakeholder"},tool:{en:"Live demo on the HMI hardware",de:"Live-Demo auf HMI-Hardware"},
+     it:{"VA-102":{w:{en:"Day 10 · Release 2.4 in Sprint 5",de:"Tag 10 · Release 2.4 in Sprint 5"},x:{en:"Stakeholders asked for “call home”. The PO added it as a new item to the Product Backlog.",de:"Die Stakeholder wünschten „Ruf zu Hause an“. Der PO legte es als neuen Eintrag ins Product Backlog."}},
+         "VA-103":{w:{en:"Day 10 · Release 2.4 in Sprint 5",de:"Tag 10 · Release 2.4 in Sprint 5"},x:{en:"Accepted without changes.",de:"Ohne Änderungen akzeptiert."}},
+         "VA-105":{w:{en:"Day 10 · Release 2.4 in Sprint 5",de:"Tag 10 · Release 2.4 in Sprint 5"},x:{en:"Feedback: also accept “warmer” and “colder”. Added to the Product Backlog for PI 4.",de:"Feedback: auch „wärmer“ und „kälter“ verstehen. Für PI 4 ins Product Backlog aufgenommen."}}}}
+  ];
+
+  /* ---------- State ---------- */
+  var S={sprint:3,ev:"plan",evDay:0,art:"pb",pbOpen:-1,wfItem:"VA-105",wfStep:0};
+
+  function dl(box,pairs){box.innerHTML='';pairs.forEach(function(p){var w=h('div',p[2]||'');var dt=h('dt',null,p[0]);var dd=h('dd',p[3]||null);if(p[1] instanceof Node)dd.appendChild(p[1]);else dd.textContent=p[1];w.appendChild(dt);w.appendChild(dd);box.appendChild(w);});}
+  function evPairs(k){var e=EV[k];var pairs=[[t('when'),tr(e.when)],[t('timebox'),tr(e.tb)],[t('who'),tr(e.who),'full'],[t('input'),tr(e.in)],[t('output'),tr(e.out)],[t('sm'),tr(e.sm),'full']];
+    var head=h('span');head.appendChild(document.createTextNode(tr(e.n)+' '));if(e.scale){head.appendChild(h('span','sc-tag scale',t('scaling')));}
+    pairs.unshift(['Event',head,'full','goal']);return pairs;}
+
+  /* ---------- Cadence ---------- */
+  function renderPi(){
+    var ol=$('scPi');ol.innerHTML='';
+    function add(lbl,sub,cls,on,fn){var li=h('li');var b=h('button','sc-sp '+(cls||''));b.type='button';b.appendChild(h('b',null,lbl));b.appendChild(h('span',null,sub));b.setAttribute('aria-pressed',on?'true':'false');b.addEventListener('click',fn);li.appendChild(b);ol.appendChild(li);}
+    add(t('piPlan'),L()==='de'?'Tag 1–2':'Day 1–2','mk',S.sprint==='pi',function(){S.sprint='pi';renderPi();});
+    SPRINTS.forEach(function(sp,i){add(sp.ip?t('ip')+' · S6':sp.id,(L()==='de'?'KW ':'Wk ')+sp.w,sp.ip?'ip':'',S.sprint===i,function(){S.sprint=i;renderPi();});});
+    add(t('ia'),'S6','mk',S.sprint==='ia',function(){S.sprint='ia';renderPi();});
+    var box=$('scSprintDetail');
+    if(S.sprint==='pi'||S.sprint==='ia'){dl(box,evPairs(S.sprint));}
+    else{var sp=SPRINTS[S.sprint];
+      dl(box,[[t('goal')+' · '+(sp.ip?t('ipLong'):t('sp')+' '+sp.id.slice(1)),tr(sp.goal),'full','goal'],[t('pts'),sp.ip?'—':sp.c+' → '+sp.d+' ('+Math.round(sp.d/sp.c*100)+' %)'],[L()==='de'?'Wochen':'Weeks',sp.w],[t('out'),tr(sp.out),'full']]);}
+    renderVel();
+  }
+  function renderVel(){
+    var svg=$('scVel');while(svg.lastChild&&svg.lastChild.nodeName!=='title')svg.removeChild(svg.lastChild);
+    var x0=28,y0=124,H=110,max=40,bw=30,gap=(300-x0-6*bw)/6;
+    function y(v){return y0-v/max*H;}
+    [0,10,20,30,40].forEach(function(v){svg.appendChild(sv('line',{x1:x0,x2:300,y1:y(v),y2:y(v),stroke:'var(--line)','stroke-width':1}));svg.appendChild(sv('text',{x:x0-6,y:y(v)+3,'text-anchor':'end'},v));});
+    var dsum=0,n=0;SPRINTS.forEach(function(s){if(!s.ip){dsum+=s.d;n++;}});var avg=dsum/n;
+    SPRINTS.forEach(function(sp,i){
+      var x=x0+gap/2+i*(bw+gap);var g=sv('g',{'class':'hit',tabindex:0,role:'button','aria-label':sp.id+(sp.ip?' IP':': '+sp.d+'/'+sp.c)});
+      if(sp.ip){g.appendChild(sv('rect',{x:x,y:y(40),width:bw,height:H,fill:'var(--tray)',stroke:'var(--line)','stroke-dasharray':'3 3'}));g.appendChild(sv('text',{x:x+bw/2,y:y(20),'text-anchor':'middle'},'IP'));}
+      else{g.appendChild(sv('rect',{x:x,y:y(sp.c),width:bw,height:y0-y(sp.c),fill:'var(--line)'}));
+        g.appendChild(sv('rect',{'class':'done',x:x+5,y:y(sp.d),width:bw-10,height:y0-y(sp.d),fill:S.sprint===i?'var(--accent)':'var(--g1)'}));
+        g.appendChild(sv('text',{x:x+bw/2,y:y(sp.c)-4,'text-anchor':'middle'},sp.d));}
+      g.appendChild(sv('text',{x:x+bw/2,y:y0+14,'text-anchor':'middle',style:S.sprint===i?'fill:var(--ink);font-weight:600':''},sp.id));
+      function pick(){S.sprint=i;renderPi();}
+      g.addEventListener('click',pick);g.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();pick();}});
+      svg.appendChild(g);
+    });
+    svg.appendChild(sv('line',{x1:x0,x2:300,y1:y(avg),y2:y(avg),stroke:'var(--ink)','stroke-width':1.5,'stroke-dasharray':'5 4'}));
+    svg.appendChild(sv('text',{x:300,y:y(avg)-4,'text-anchor':'end',style:'fill:var(--ink)'},'Ø '+avg.toFixed(1).replace('.',L()==='de'?',':'.')));
+  }
+
+  /* ---------- Calendar ---------- */
+  function renderCal(){
+    var c=$('scCal');c.innerHTML='';
+    CAL.forEach(function(evs,d){
+      if(d%5===0)c.appendChild(h('div','sc-wk',t('wk')+' '+(d/5+1)));
+      var cell=h('div','sc-day');var dh=h('div','dh');dh.appendChild(h('span',null,t('days')[d%5]));dh.appendChild(h('span',null,t('day')+' '+(d+1)));cell.appendChild(dh);
+      evs.forEach(function(k){var b=h('button','sc-ev',tr(EV[k].n));b.type='button';b.style.setProperty('--ec','var('+EV[k].c+')');
+        b.setAttribute('aria-pressed',S.ev===k&&S.evDay===d?'true':'false');
+        b.addEventListener('click',function(){S.ev=k;S.evDay=d;renderCal();});cell.appendChild(b);});
+      c.appendChild(cell);
+    });
+    dl($('scEvDetail'),evPairs(S.ev));
+  }
+
+  /* ---------- Artifacts ---------- */
+  function renderArtTabs(){
+    var tb=$('scArtTabs');tb.innerHTML='';
+    [['pb','tabPB'],['sb','tabSB'],['inc','tabInc']].forEach(function(p){var b=h('button',null,t(p[1]));b.type='button';b.setAttribute('role','tab');b.setAttribute('aria-selected',S.art===p[0]?'true':'false');b.addEventListener('click',function(){S.art=p[0];renderArt();});tb.appendChild(b);});
+  }
+  function commit(k,v){var d=h('div','sc-commit');d.appendChild(h('span','k',t(k)));d.appendChild(h('span','v',v));return d;}
+  function remaining(){var r=0;CARDS.forEach(function(c){if(c.c<2)r+=c.p;});return r;}
+  function renderArt(){
+    renderArtTabs();var box=$('scArt');box.innerHTML='';
+    if(S.art==='pb'){
+      box.appendChild(commit('cPB',t('productGoal')));box.appendChild(h('p','sc-note',t('pbNote')));
+      var ol=h('ol','sc-pbl');
+      PBL.forEach(function(it,i){
+        var li=h('li','sc-pbi');li.setAttribute('data-open',S.pbOpen===i?'true':'false');
+        var b=h('button');b.type='button';b.setAttribute('aria-expanded',S.pbOpen===i?'true':'false');
+        b.appendChild(h('span','rk',String(i+1)));b.appendChild(h('span','id',it.id));b.appendChild(h('span','tt',tr(it.t)));
+        b.appendChild(h('span','sc-pts',it.p+' SP'));b.appendChild(h('span','sc-st '+it.st,it.st==='ready'?t('ready'):it.st==='ref'?t('refining'):t('newSt')));
+        b.addEventListener('click',function(){S.pbOpen=S.pbOpen===i?-1:i;renderArt();});
+        li.appendChild(b);
+        if(S.pbOpen===i){var m=h('div','more');var p1=h('div');p1.appendChild(h('strong',null,t('story')+': '));p1.appendChild(document.createTextNode(tr(it.s)));m.appendChild(p1);
+          var p2=h('div');p2.appendChild(h('strong',null,t('ac')+':'));var ul=h('ul');tr(it.a).forEach(function(a){ul.appendChild(h('li',null,a));});p2.appendChild(ul);m.appendChild(p2);li.appendChild(m);}
+        ol.appendChild(li);
+      });
+      box.appendChild(ol);
+    } else if(S.art==='sb'){
+      box.appendChild(commit('cSB',tr(SPRINTS[3].goal)));box.appendChild(h('p','sc-note',t('sbNote')));
+      var wrap=h('div','sc-sbl');var board=h('div','sc-board');
+      [['todo',0],['doing',1],['done',2]].forEach(function(col){
+        var c=h('div','sc-col'+(col[1]===2?' done':''));var hd=h('h5');var pts=0,cnt=0;CARDS.forEach(function(k){if(k.c===col[1]){pts+=k.p;cnt++;}});
+        hd.appendChild(h('span',null,t(col[0])));hd.appendChild(h('span',null,cnt+' · '+pts+' SP'));c.appendChild(hd);
+        CARDS.forEach(function(k){if(k.c!==col[1])return;var b=h('button','sc-card');b.type='button';var chh=h('span','ch');chh.appendChild(h('span',null,k.id));chh.appendChild(h('span',null,k.p+' SP'));b.appendChild(chh);b.appendChild(h('span',null,tr(k.t)));
+          b.setAttribute('aria-label',k.id+' '+tr(k.t)+', '+t(col[0]));
+          b.addEventListener('click',function(){k.c=(k.c+1)%3;renderArt();});c.appendChild(b);});
+        board.appendChild(c);
+      });
+      wrap.appendChild(board);
+      var ch=h('div','sc-chart');ch.appendChild(h('h5',null,t('bdH')));
+      var svg=sv('svg',{viewBox:'0 0 220 150',role:'img','aria-label':t('bdH')});
+      var x0=24,y0=128,W=186,H=112;function x(d){return x0+d/10*W;}function y(v){return y0-v/35*H;}
+      [0,10,20,30].forEach(function(v){svg.appendChild(sv('line',{x1:x0,x2:x0+W,y1:y(v),y2:y(v),stroke:'var(--line)'}));svg.appendChild(sv('text',{x:x0-5,y:y(v)+3,'text-anchor':'end'},v));});
+      [0,2,4,6,8,10].forEach(function(d){svg.appendChild(sv('text',{x:x(d),y:y0+13,'text-anchor':'middle'},d));});
+      svg.appendChild(sv('line',{x1:x(0),y1:y(35),x2:x(10),y2:y(0),stroke:'var(--muted)','stroke-dasharray':'4 4'}));
+      var pts2=HIST.concat([remaining()]);var dpath=pts2.map(function(v,i){return x(i)+','+y(v);}).join(' ');
+      var area='M'+x(0)+','+y0+' L'+pts2.map(function(v,i){return x(i)+','+y(v);}).join(' L')+' L'+x(pts2.length-1)+','+y0+' Z';
+      svg.appendChild(sv('path',{d:area,fill:'var(--g1)','fill-opacity':.12}));
+      svg.appendChild(sv('polyline',{points:dpath,fill:'none',stroke:'var(--g1)','stroke-width':2.2,'stroke-linejoin':'round'}));
+      var last=pts2.length-1,rv=pts2[last];svg.appendChild(sv('circle',{cx:x(last),cy:y(rv),r:4.5,fill:'var(--accent)',stroke:'var(--sheet)','stroke-width':1.5}));
+      svg.appendChild(sv('text',{x:x(last)+7,y:y(rv)-6,style:'fill:var(--ink);font-weight:600'},rv+' SP · '+t('today')));
+      ch.appendChild(svg);
+      var ideal=35-35*6/10;var pill=h('span','sc-pill '+(rv<=ideal?'good':'ok'),rv<=ideal?t('onTrack'):t('behind'));var pr=h('div','sc-row');pr.style.marginTop='8px';pr.appendChild(pill);ch.appendChild(pr);
+      wrap.appendChild(ch);box.appendChild(wrap);
+      var rr=h('div','sc-row');var rb=h('button','sc-link',t('reset'));rb.type='button';rb.addEventListener('click',function(){CARDS.forEach(function(c,i){c.c=CARD0[i];});renderArt();});rr.appendChild(rb);box.appendChild(rr);
+    } else {
+      box.appendChild(commit('cInc',L()==='de'?'Gemeinsamer Qualitätsstandard des Teams für jedes Increment.':'The team\'s shared quality standard for every Increment.'));
+      box.appendChild(h('p','sc-note',t('incNote')));
+      var ul=h('ul','sc-dod');var met=0;
+      DOD.forEach(function(d){if(d.v)met++;var li=h('li');var b=h('button','sc-chk');b.type='button';b.setAttribute('role','checkbox');b.setAttribute('aria-checked',d.v?'true':'false');b.appendChild(h('i',null,d.v?'✓':''));b.appendChild(h('span',null,tr(d.t)));b.addEventListener('click',function(){d.v=!d.v;renderArt();});li.appendChild(b);ul.appendChild(li);});
+      box.appendChild(ul);
+      var all=met===DOD.length;var row=h('div','sc-row');row.appendChild(h('span','sc-pill '+(all?'good':'bad'),all?t('releasable'):t('notRel')));row.appendChild(h('span','sc-note',met+' / '+DOD.length+' '+t('dodMet')));box.appendChild(row);
+      var mt=h('div','sc-meter');var sp=h('span');sp.style.width=(met/DOD.length*100)+'%';mt.appendChild(sp);box.appendChild(mt);
+      box.appendChild(h('strong',null,t('incItems')));
+      var done=CARDS.filter(function(c){return c.c===2;});
+      if(!done.length)box.appendChild(h('p','sc-note',t('noItems')));
+      else{var il=h('ul','sc-inc');done.forEach(function(c){var li=h('li');li.appendChild(h('b',null,c.id));li.appendChild(document.createTextNode(tr(c.t)));if(!all)li.style.opacity='.5';il.appendChild(li);});box.appendChild(il);}
+    }
+  }
+
+  /* ---------- Item workflow ---------- */
+  function renderWf2(){
+    var de=L()==='de';
+    var it=$('scWfItems');it.innerHTML='';
+    WITEMS.forEach(function(x){var b=h('button','sc-item');b.type='button';b.style.setProperty('--ic','var('+ITEM_C[x.id]+')');b.setAttribute('aria-pressed',S.wfItem===x.id?'true':'false');
+      b.appendChild(h('b',null,x.id));b.appendChild(h('span',null,tr(x.t)));b.appendChild(h('em',null,x.p+' SP'));
+      b.addEventListener('click',function(){S.wfItem=x.id;renderWf2();});it.appendChild(b);});
+    var lg=$('scWfLegend');lg.innerHTML='';
+    PHASES.forEach(function(p,pi){var li=h('li','sc-ph'+(STEP_PHASE[S.wfStep]===pi?' on':''));li.style.setProperty('--pc','var('+p.c+')');li.appendChild(h('i'));li.appendChild(document.createTextNode(tr(p.n)));lg.appendChild(li);});
+    var ol=$('scWfSteps');ol.innerHTML='';
+    WSTEPS.forEach(function(s,i){var li=h('li');var b=h('button','sc-wstep');b.type='button';b.style.setProperty('--pc','var('+PHASES[STEP_PHASE[i]].c+')');
+      if(i<S.wfStep)b.classList.add('past');
+      b.setAttribute('aria-pressed',S.wfStep===i?'true':'false');
+      b.appendChild(h('b',null,String(i+1)));b.appendChild(h('span',null,tr(s.n)));
+      b.addEventListener('click',function(){S.wfStep=i;renderWf2();});li.appendChild(b);ol.appendChild(li);});
+    var bar=$('scWfBar');bar.style.width=((S.wfStep+1)/WSTEPS.length*100)+'%';bar.style.background='var('+PHASES[STEP_PHASE[S.wfStep]].c+')';
+    var s=WSTEPS[S.wfStep],x=s.it[S.wfItem],ph=PHASES[STEP_PHASE[S.wfStep]],d=$('scWfDetail');d.innerHTML='';
+    d.style.setProperty('--pc','var('+ph.c+')');
+    var hd=h('div','sc-wfh full');hd.appendChild(h('span','sc-phtag',tr(ph.n)));hd.appendChild(h('strong',null,(S.wfStep+1)+' / '+WSTEPS.length+' · '+tr(s.n)));d.appendChild(hd);
+    [[de?'Eingang':'Input',tr(s.in)],[de?'Ergebnis':'Output',tr(s.out)],[de?'Rolle':'Role',tr(s.who)],[de?'Werkzeuge':'Tools',tr(s.tool)]].forEach(function(p){
+      var w=h('div');w.appendChild(h('dt',null,p[0]));w.appendChild(h('dd',null,p[1]));d.appendChild(w);});
+    var it2=h('div','sc-wfit full');it2.style.setProperty('--ic','var('+ITEM_C[S.wfItem]+')');
+    var top=h('div','sc-wfit-top');top.appendChild(h('b',null,S.wfItem));top.appendChild(h('span',null,tr(x.w)));it2.appendChild(top);
+    it2.appendChild(h('p',null,tr(x.x)));d.appendChild(it2);
+    renderTl();
+  }
+  function renderTl(){
+    var g=$('scTl');g.innerHTML='';var de=L()==='de';
+    var c0=h('div','th tlab',de?'Zeit':'Time');g.appendChild(c0);
+    WITEMS.forEach(function(x){var b=h('button','th sc-tlh');b.type='button';b.style.setProperty('--ic','var('+ITEM_C[x.id]+')');b.setAttribute('aria-pressed',S.wfItem===x.id?'true':'false');
+      b.appendChild(h('b',null,x.id));b.appendChild(h('span',null,tr(x.t).replace(/^(Command|Befehl): /,'')));
+      b.addEventListener('click',function(){S.wfItem=x.id;renderWf2();});g.appendChild(b);});
+    TLROWS.forEach(function(r,ri){
+      var on=SCHED[S.wfItem][S.wfStep].indexOf(ri)>=0;
+      var lab=h('div','tr'+(r.sb?' sb':'')+(on?' on':''));if(r.a)lab.appendChild(h('b',null,tr(r.a)));lab.appendChild(h('span',null,tr(r.b)));g.appendChild(lab);
+      WITEMS.forEach(function(x){
+        var cell=h('div','tc'+(r.sb?' sb':'')+(S.wfItem===x.id?' sel':''));cell.style.setProperty('--ic','var('+ITEM_C[x.id]+')');
+        SCHED[x.id].forEach(function(rows,si){
+          var k=rows.indexOf(ri);if(k<0)return;
+          var b=h('button','sc-tk'+(k>0?' cont':''));b.type='button';b.style.setProperty('--pc','var('+PHASES[STEP_PHASE[si]].c+')');
+          var sel=S.wfItem===x.id&&S.wfStep===si;b.setAttribute('aria-pressed',sel?'true':'false');
+          if(!sel&&S.wfStep===si)b.classList.add('same');
+          b.appendChild(h('i',null,String(si+1)));if(rows.length>1)b.appendChild(h('em',null,(k+1)+'/'+rows.length));b.appendChild(h('span',null,tr(SHORT[si])));
+          b.setAttribute('aria-label',x.id+' · '+(si+1)+' '+tr(SHORT[si])+' · '+(r.a?tr(r.a)+' ':'')+tr(r.b));
+          b.addEventListener('click',function(){S.wfItem=x.id;S.wfStep=si;renderWf2();});
+          cell.appendChild(b);
+        });
+        g.appendChild(cell);
+      });
+    });
+  }
+
+  function renderStatic(){document.querySelectorAll('[data-sc]').forEach(function(n){var v=t(n.getAttribute('data-sc'));if(typeof v==='string')n.innerHTML=v;});}
+  function renderAll(){renderStatic();renderPi();renderCal();renderArt();renderWf2();}
+  ['lang-en','lang-de'].forEach(function(id){var b=$(id);if(b)b.addEventListener('click',function(){setTimeout(renderAll,0);});});
+  renderAll();
+})();
+</script>
+<script>
+/* ---------- Role switch + section menu ---------- */
+(function(){
+  function $(id){return document.getElementById(id);}
+  function L(){return document.documentElement.lang==='de'?'de':'en';}
+  var R={
+    all:{kpi:[0,1,2,3,4],cases:[0,1,2,3],role:{en:"Process &amp; Project Manager · Scrum Master · BI Analyst",de:"Prozess- &amp; Projektmanager · Scrum Master · BI Analyst"}},
+    pm:{tab:"project",kpi:[2,4,0,1,3],cases:[2,3,1,0],fitK:[2,4],fitC:[2,3],
+        role:{en:"IT Project Manager · Automotive &amp; Software",de:"IT-Projektmanager · Automotive &amp; Software"},
+        intro:{en:"Project manager with 5+ years of experience steering IT and automotive software projects from planning to delivery: 10+ international projects for Volkswagen and 15+ projects for an HMI software product. Schedules, budgets, risks and stakeholders are my daily work. Below are my results and a complete project sample set, from charter to retrospective.",
+               de:"Projektmanager mit über 5 Jahren Erfahrung in der Steuerung von IT- und Automotive-Softwareprojekten von der Planung bis zur Lieferung: 10+ internationale Projekte für Volkswagen und 15+ Projekte für ein HMI-Softwareprodukt. Termine, Budgets, Risiken und Stakeholder sind meine tägliche Arbeit. Unten finden Sie meine Ergebnisse und ein komplettes Projektbeispiel vom Charter bis zur Retrospektive."}},
+    pr:{tab:"process",kpi:[3,0,1,2,4],cases:[1,0,3,2],fitK:[3,0,1],fitC:[1,0],
+        role:{en:"Process Manager · Lean Six Sigma Green Belt",de:"Prozessmanager · Lean Six Sigma Green Belt"},
+        intro:{en:"Process manager with 5+ years of experience analysing, modelling and digitalising business processes: 25+ processes optimised, delivery time cut by 20% and the release process made 30% faster. I work with ASPICE, Lean Six Sigma, Jira, Confluence, Visio and draw.io. Below are my process workflows and own work samples.",
+               de:"Prozessmanager mit über 5 Jahren Erfahrung in Analyse, Modellierung und Digitalisierung von Geschäftsprozessen: 25+ Prozesse optimiert, Lieferzeit um 20 % gekürzt und Release-Prozess 30 % schneller. Ich arbeite mit ASPICE, Lean Six Sigma, Jira, Confluence, Visio und draw.io. Unten finden Sie meine Prozess-Workflows und eigene Arbeitsproben."}},
+    sm:{tab:"scrum",kpi:[4,1,0,2,3],cases:[0,1,3,2],fitK:[4,1],fitC:[0],
+        role:{en:"Scrum Master · Agile Coach",de:"Scrum Master · Agile Coach"},
+        intro:{en:"In my last role I worked as Scrum Master and agile coach for a development team of an infotainment HMI product: 2-week Sprints, PI Planning every quarter, coaching the team and the Product Owner and removing impediments. I am preparing for the Scrum Master certification. Below is an interactive walk-through of that project.",
+               de:"In meiner letzten Rolle war ich Scrum Master und Agile Coach für ein Entwicklungsteam eines Infotainment-HMI-Produkts: 2-Wochen-Sprints, PI Planning jedes Quartal, Coaching von Team und Product Owner und Beseitigen von Hindernissen. Ich bereite mich auf die Scrum-Master-Zertifizierung vor. Unten finden Sie einen interaktiven Rundgang durch dieses Projekt."}}
+  };
+  var UI={en:{l:"Profile focus",pm:"Project Manager",pr:"Process Manager",sm:"Scrum Master",all:"Show all",
+              nav:{cases:"Results",case:"Case study",samples:"Work samples",dashboard:"Dashboard",career:"Career",tools:"Toolbox",languages:"Languages",contact:"Contact"},navL:"Sections"},
+          de:{l:"Profil-Schwerpunkt",pm:"Projektmanager",pr:"Prozessmanager",sm:"Scrum Master",all:"Alles zeigen",
+              nav:{cases:"Ergebnisse",case:"Fallstudie",samples:"Arbeitsproben",dashboard:"Dashboard",career:"Werdegang",tools:"Werkzeuge",languages:"Sprachen",contact:"Kontakt"},navL:"Abschnitte"}};
+  var defIntro={en:"Project and process manager with 5+ years of experience analysing and optimising business processes and steering IT and automotive projects from planning to delivery. This portfolio collects samples of my own work. Every document opens online in read-only view.",
+                de:(window.__kelDE&&window.__kelDE.intro)||null};
+  var cur='all';try{var sv=localStorage.getItem('kel-role');if(sv&&R[sv])cur=sv;}catch(e){}
+  var kpiBox=document.querySelector('.kpis'),kpis=[].slice.call(kpiBox.children);
+  var caseBox=document.querySelector('#cases .cases'),cases=[].slice.call(caseBox.children);
+
+  function text(animate){
+    var r=R[cur],l=L(),role=$('heroRole'),intro=$('heroIntro');
+    function put(){role.innerHTML=r.role[l];intro.innerHTML=r.intro?r.intro[l]:(defIntro[l]||defIntro.en);role.classList.remove('swap');intro.classList.remove('swap');}
+    if(animate&&!matchMedia('(prefers-reduced-motion: reduce)').matches){role.classList.add('swap');intro.classList.add('swap');setTimeout(put,160);}else put();
+  }
+  function apply(animate,openTab){
+    var r=R[cur];
+    document.querySelectorAll('.hire [data-role]').forEach(function(b){b.setAttribute('aria-pressed',b.getAttribute('data-role')===cur?'true':'false');});
+    $('hireAll').hidden=cur==='all';
+    r.kpi.forEach(function(i){kpiBox.appendChild(kpis[i]);});
+    kpis.forEach(function(li,i){li.classList.toggle('fit',!!(r.fitK&&r.fitK.indexOf(i)>=0));});
+    r.cases.forEach(function(i){caseBox.appendChild(cases[i]);});
+    cases.forEach(function(c,i){c.classList.toggle('fit',!!(r.fitC&&r.fitC.indexOf(i)>=0));});
+    if(openTab&&r.tab){var tb=$('tab-'+r.tab);if(tb&&tb.getAttribute('aria-selected')!=='true')tb.click();}
+    text(animate);
+  }
+  function save(){try{localStorage.setItem('kel-role',cur);}catch(e){}}
+  document.querySelectorAll('.hire [data-role]').forEach(function(b){b.addEventListener('click',function(){var k=b.getAttribute('data-role');cur=(cur===k)?'all':k;save();apply(true,true);});});
+  $('hireAll').addEventListener('click',function(){cur='all';save();apply(true,false);});
+
+  function lang(){
+    var u=UI[L()];$('hireL').textContent=u.l;
+    document.querySelectorAll('.hire [data-role]').forEach(function(b){b.textContent=u[b.getAttribute('data-role')];});
+    $('hireAll').textContent=u.all;
+    document.querySelectorAll('#secnav a').forEach(function(a){a.textContent=u.nav[a.getAttribute('data-k')];});
+    document.querySelector('.secnav').setAttribute('aria-label',u.navL);
+    text(false);
+  }
+  ['lang-en','lang-de'].forEach(function(id){var b=$(id);if(b)b.addEventListener('click',function(){setTimeout(lang,0);});});
+
+  /* section menu: highlight the section in view */
+  var links={};document.querySelectorAll('#secnav a').forEach(function(a){links[a.getAttribute('data-k')]=a;});
+  var nav=$('secnav');
+  function mark(k){Object.keys(links).forEach(function(x){links[x].classList.toggle('on',x===k);});
+    var a=links[k];if(a){var l=a.offsetLeft-16,rt=a.offsetLeft+a.offsetWidth+16;if(l<nav.scrollLeft||rt>nav.scrollLeft+nav.clientWidth)nav.scrollTo({left:Math.max(0,l),behavior:'smooth'});}}
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)mark(e.target.id);});},{rootMargin:'-30% 0px -65% 0px'});
+    Object.keys(links).forEach(function(k){var sec=$(k);if(sec)io.observe(sec);});
+    var hio=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)mark('');});},{rootMargin:'0px 0px -70% 0px'});
+    hio.observe(document.querySelector('header'));
+  }
+  lang();apply(false,cur!=='all'&&!location.hash);
+})();
+</script>
 </body>
 </html>
