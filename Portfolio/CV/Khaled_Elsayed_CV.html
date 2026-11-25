@@ -95,6 +95,7 @@ h2 .hint{font-size:10px;letter-spacing:0;text-transform:none;font-weight:400;col
 .strs{display:grid;grid-template-columns:repeat(3,1fr);gap:12px 18px}
 .str{border:0;border-left:2px solid var(--navy-soft);background:none;padding:2px 0 2px 12px;text-align:left;font:inherit;color:inherit;cursor:pointer;border-radius:0}
 .str b{display:block;color:var(--navy);font-size:12.5px;margin-bottom:2px}
+.str b span{font-size:inherit;color:inherit}
 .str span{font-size:12px;color:var(--muted)}
 .str:hover{border-left-color:var(--gold)}
 .str[aria-pressed="true"]{border-left-color:var(--gold);background:var(--hl)}
@@ -192,6 +193,7 @@ body.filtering ul.b li.hit::before{background:var(--gold)}
   .tl{row-gap:5px}
   .photo{height:124px;width:108px}
   .sheet .t,.str span,.org,.meta{font-size:10.6px}
+  .str b span{font-size:inherit}
   ul.b{gap:1px}
   .sheet:last-of-type{break-after:auto}
   .tl{min-width:0}
@@ -214,6 +216,7 @@ body.filtering ul.b li.hit::before{background:var(--gold)}
     <span class="lbl"><span class="l-de">Schwerpunkt</span><span class="l-en">Focus</span></span>
     <div class="chips" id="chips">
       <button type="button" class="chip" data-f="all" aria-pressed="true"><span class="l-de">Alle</span><span class="l-en">All</span></button>
+      <button type="button" class="chip" data-f="ci" aria-pressed="false"><span class="l-de">KVP &amp; OpEx</span><span class="l-en">CI &amp; OpEx</span><span class="n"></span></button>
       <button type="button" class="chip" data-f="pm" aria-pressed="false"><span class="l-de">Prozessmanagement</span><span class="l-en">Process management</span><span class="n"></span></button>
       <button type="button" class="chip" data-f="ps" aria-pressed="false"><span class="l-de">Projektsteuerung</span><span class="l-en">Project control</span><span class="n"></span></button>
       <button type="button" class="chip" data-f="bi" aria-pressed="false"><span>BI &amp; KPIs</span><span class="n"></span></button>
@@ -234,7 +237,7 @@ body.filtering ul.b li.hit::before{background:var(--gold)}
   <header class="head">
     <div>
       <h1>Khaled Elsayed</h1>
-      <p class="role"><span class="l-de">Prozess- und Projektmanager</span><span class="l-en">Process &amp; Project Manager</span><i>|</i>BI Analyst<i>|</i>Scrum Master</p>
+      <p class="role"><span class="l-de">Prozess- &amp; KVP-Manager</span><span class="l-en">Continuous Improvement &amp; Process Manager</span><i>|</i><span class="l-de">Projektmanager</span><span class="l-en">Project Manager</span><span class="l-de"><i>|</i>BI Analyst</span></p>
       <div class="meta">
         <span><span class="l-de">Feuerweg 19, 90443 Nürnberg</span><span class="l-en">Feuerweg 19, 90443 Nuremberg, Germany</span></span>
         <b>+49 178 7985231</b>
@@ -260,14 +263,14 @@ body.filtering ul.b li.hit::before{background:var(--gold)}
 
   <section>
     <h2><span class="l-de">Profil</span><span class="l-en">Profile</span></h2>
-    <p class="prof l-de">Erfahrener <b>Projekt- und Prozessmanager</b> mit 5+ Jahren Berufserfahrung in der Analyse und Optimierung von Geschäftsprozessen sowie in der Steuerung von Projekten von der Planung bis zur Umsetzung. Entwickelt gemeinsam mit Fachbereichen effiziente Prozesse, bringt Tools und Automatisierung gezielt in Abläufe ein und begleitet Veränderungen. Fundierte Praxis in Prozessdokumentation und -analyse, Risikomanagement, Projektkoordination, Stakeholder-Management, Prozess-KPIs (Soll-Ist-Vergleiche) und <b>KPI-Reporting mit Power BI</b>. Technischer Hintergrund als Maschinenbauingenieur (B.Sc.) mit Erfahrung in Industrie- und IT-Projekten für <b>Volkswagen, Porsche, Audi und ZF</b>; <b>Six Sigma Green Belt</b>, Google Project Management Diploma. Analytisch, strukturiert, eigenverantwortlich und kommunikationsstark.</p>
-    <p class="prof l-en">Experienced <b>project and process manager</b> with 5+ years of professional experience in analysing and optimising business processes and in steering projects from planning to delivery. Works with business units to design efficient processes, brings tools and automation into workflows where they add value, and guides teams through change. Solid hands-on practice in process documentation and analysis, risk management, project coordination, stakeholder management, process KPIs (target-vs-actual comparisons) and <b>KPI reporting with Power BI</b>. Technical background as a mechanical engineer (B.Sc.) with experience in industrial and IT projects for <b>Volkswagen, Porsche, Audi and ZF</b>; <b>Six Sigma Green Belt</b>, Google Project Management Diploma. Analytical, structured, self-directed and a strong communicator.</p>
+    <p class="prof l-de">Erfahrener <b>Prozess- und Projektmanager</b> mit 5+ Jahren Berufserfahrung in <b>kontinuierlicher Verbesserung (KVP)</b> und <b>Operational Excellence</b>: Analyse und Optimierung von Geschäftsprozessen mit <b>DMAIC, PDCA</b>, Ursachenanalyse und Standardisierung sowie Steuerung von Projekten von der Planung bis zur Umsetzung. Messbare Ergebnisse: Lieferzeiten um bis zu 20 % verkürzt, Release-Prozess um 30 % beschleunigt, Produktkosten um 10–13 % gesenkt. Entwickelt gemeinsam mit Fachbereichen effiziente Prozesse, bringt Tools und Automatisierung gezielt ein und verankert Veränderungen nachhaltig. Fundierte Praxis in Prozessdokumentation, Risiko- und Stakeholder-Management, Prozess-KPIs (Soll-Ist-Vergleiche) und <b>KPI-Reporting mit Power BI</b>. Maschinenbauingenieur (B.Sc.) mit Erfahrung in Industrie- und IT-Projekten für <b>Volkswagen, Porsche, Audi und ZF</b>; <b>Six Sigma Green Belt</b>, Google Project Management Diploma. Analytisch, strukturiert, eigenverantwortlich und kommunikationsstark.</p>
+    <p class="prof l-en">Experienced <b>process and project manager</b> with 5+ years in <b>continuous improvement</b> and <b>operational excellence</b>: analysing and optimising business processes with <b>DMAIC, PDCA</b>, root cause analysis and standardisation, and steering projects from planning to delivery. Measurable results: delivery time cut by up to 20%, release process 30% faster, product costs down 10–13%. Works with business units to design efficient processes, brings in tools and automation where they add value, and makes change stick. Solid hands-on practice in process documentation, risk and stakeholder management, process KPIs (target-vs-actual) and <b>KPI reporting with Power BI</b>. Mechanical engineer (B.Sc.) with experience in industrial and IT projects for <b>Volkswagen, Porsche, Audi and ZF</b>; <b>Six Sigma Green Belt</b>, Google Project Management Diploma. Analytical, structured, self-directed and a strong communicator.</p>
   </section>
 
   <section>
     <h2><span class="l-de">Stärken</span><span class="l-en">Key strengths</span> <span class="hint web l-de">zum Hervorheben anklicken</span><span class="hint web l-en">click to highlight</span></h2>
     <div class="strs">
-      <button type="button" class="str" data-f="pm" aria-pressed="false"><b>Process Excellence</b><span class="l-de">Prozessanalyse, -optimierung und -modellierung (Visio, draw.io, Jira)</span><span class="l-en">Process analysis, optimisation and modelling (Visio, draw.io, Jira)</span></button>
+      <button type="button" class="str" data-f="ci" aria-pressed="false"><b><span class="l-de">KVP &amp; Operational Excellence</span><span class="l-en">Continuous improvement &amp; OpEx</span></b><span class="l-de">DMAIC, PDCA, Ursachenanalyse, Standardisierung, Prozessmodellierung (Visio, draw.io, Jira)</span><span class="l-en">DMAIC, PDCA, root cause analysis, standardisation, process modelling (Visio, draw.io, Jira)</span></button>
       <button type="button" class="str" data-f="ps" aria-pressed="false"><b><span class="l-de">Projektmanagement</span><span class="l-en">Project management</span></b><span class="l-de">Planung bis Umsetzung, Termine, Ressourcen, Budget, Machbarkeitsanalyse</span><span class="l-en">Planning to delivery, schedules, resources, budget, feasibility</span></button>
       <button type="button" class="str" data-f="auto" aria-pressed="false"><b><span class="l-de">Digitalisierung &amp; Automatisierung</span><span class="l-en">Digitalisation &amp; automation</span></b><span class="l-de">Polarion-Jira-Automatisierung, Tool-Optimierung, KI, KPIs</span><span class="l-en">Polarion-to-Jira automation, tool optimisation, AI, KPIs</span></button>
       <button type="button" class="str" data-f="bi" aria-pressed="false"><b>Business Analysis</b><span class="l-de">Budgetplanung, Kostenkontrolle, Soll-Ist-Vergleiche, KPIs, Power-BI-Dashboards</span><span class="l-en">Budget planning, cost control, target-vs-actual, KPIs, Power BI dashboards</span></button>
@@ -285,7 +288,7 @@ body.filtering ul.b li.hit::before{background:var(--gold)}
           <a class="pos" href="#job-aict" data-go title="10/2017 – 10/2021" style="left:19.57%;width:35.5%">AICT · <span class="l-de">&nbsp;Ingenieur / SPS</span><span class="l-en">&nbsp;Engineer / PLC</span></a>
           <a class="pos" href="#job-zf" data-go title="ZF Friedrichshafen · 03/2022 – 10/2022" style="left:58%;width:5.6%">ZF</a>
           <a class="pos dk" href="#job-4aces" data-go title="4ACES-Tech · 11/2022 – 12/2024" style="left:63.77%;width:18.7%">4ACES</a>
-          <a class="pos dk" href="#job-esol" data-go title="e.Solutions · 01/2025 – 08/2026" style="left:82.6%;width:14.5%">e.Solutions</a>
+          <a class="pos dk" href="#job-esol" data-go title="e.Solutions · 01/2025 – 11/2026" style="left:82.6%;width:16.7%">e.Solutions</a>
         </div>
         <div class="rl"><span class="l-de">Abschlüsse</span><span class="l-en">Credentials</span></div>
         <div class="track" style="background:none">
@@ -303,16 +306,16 @@ body.filtering ul.b li.hit::before{background:var(--gold)}
   <section id="sec-exp">
     <h2><span class="l-de">Berufserfahrung</span><span class="l-en">Professional experience</span></h2>
     <div class="job" id="job-esol">
-      <div class="jh"><h3><span class="l-de">Projektmanager / Prozessmanager</span><span class="l-en">Project Manager / Process Manager</span></h3><span class="date">01/2025 – 08/2026</span></div>
+      <div class="jh"><h3><span class="l-de">Projektmanager / Prozessmanager</span><span class="l-en">Project Manager / Process Manager</span></h3><span class="date">01/2025 – 11/2026</span></div>
       <div class="org"><span class="l-de">e.Solutions / Alten Consulting, Nürnberg</span><span class="l-en">e.Solutions / Alten Consulting, Nuremberg</span></div>
       <ul class="b">
         <li data-t="ps sc"><span class="l-de">Planung, Koordination und Nachverfolgung von 15+ IT- und Softwareentwicklungsprojekten für das HMI-Softwareprodukt von Audi, Porsche und Volkswagen mit mehr als 25 Stakeholdern unter Berücksichtigung von Qualität, Terminen und Projektzielen</span><span class="l-en">Planned, coordinated and tracked 15+ IT and software development projects for the HMI software product of Audi, Porsche and Volkswagen with 25+ stakeholders, against quality, schedule and project goals</span></li>
-        <li data-t="pm auto"><span class="l-de">Analyse, Weiterentwicklung und Optimierung von Entwicklungs- und Projektprozessen sowie der unterstützenden Werkzeuge (Jira, Confluence, Polarion, SonarQube, Power BI, Bitbucket)</span><span class="l-en">Analysed, developed and optimised development and project processes and their supporting tools (Jira, Confluence, Polarion, SonarQube, Power BI, Bitbucket)</span></li>
-        <li data-t="pm auto"><span class="l-de">Konzeption, Digitalisierung und Modellierung von 10+ strategischen Prozessen und Workflows in Jira/Confluence sowie Standardisierung und Visualisierung der Abläufe mit Visio und draw.io, wodurch die Lieferzeit um 20 % verkürzt wurde</span><span class="l-en">Designed, digitised and modelled 10+ strategic processes and workflows in Jira/Confluence and standardised and visualised them in Visio and draw.io, cutting delivery time by 20%</span></li>
-        <li data-t="risk pm"><span class="l-de">Durchführung von 6 Risikomanagementprozessen wie Risikolisten-Analyse, Risiko-Workshops und Erstellung des Risikomanagementplans sowie Beratung von Product Owners zu Maßnahmen der Prozessoptimierung, wodurch die Produktkosten um 10 % gesunken sind</span><span class="l-en">Ran 6 risk management processes including risk register analysis, risk workshops and the risk management plan, and advised Product Owners on process improvements, lowering product costs by 10%</span></li>
+        <li data-t="pm auto ci"><span class="l-de">Analyse, Weiterentwicklung und Optimierung von Entwicklungs- und Projektprozessen sowie der unterstützenden Werkzeuge (Jira, Confluence, Polarion, SonarQube, Power BI, Bitbucket)</span><span class="l-en">Analysed, developed and optimised development and project processes and their supporting tools (Jira, Confluence, Polarion, SonarQube, Power BI, Bitbucket)</span></li>
+        <li data-t="pm auto ci"><span class="l-de">Konzeption, Digitalisierung und Modellierung von 10+ strategischen Prozessen und Workflows in Jira/Confluence nach DMAIC und PDCA sowie Standardisierung und Visualisierung der Abläufe mit Visio und draw.io, wodurch die Lieferzeit um 20 % verkürzt wurde</span><span class="l-en">Designed, digitised and modelled 10+ strategic processes and workflows in Jira/Confluence using DMAIC and PDCA, and standardised and visualised them in Visio and draw.io, cutting delivery time by 20%</span></li>
+        <li data-t="risk pm ci"><span class="l-de">Durchführung von 6 Risikomanagementprozessen wie Risikolisten-Analyse, Risiko-Workshops und Erstellung des Risikomanagementplans sowie Beratung von Product Owners zu Maßnahmen der Prozessoptimierung, wodurch die Produktkosten um 10 % gesunken sind</span><span class="l-en">Ran 6 risk management processes including risk register analysis, risk workshops and the risk management plan, and advised Product Owners on process improvements, lowering product costs by 10%</span></li>
         <li data-t="auto"><span class="l-de">Automatisierung der Übernahme von User Stories aus Polarion nach Jira sowie Automatisierung von Geschäftsprozessen</span><span class="l-en">Automated the transfer of user stories from Polarion to Jira and automated further business processes</span></li>
         <li data-t="sc"><span class="l-de">Einarbeitung und Schulung neuer Kolleginnen und Kollegen in bestehenden Prozessen und Tools</span><span class="l-en">Onboarded and trained new colleagues on existing processes and tools</span></li>
-        <li data-t="sc pm auto"><span class="l-de">Durchführung von 10 Change- und Problem-Management-Aktivitäten sowie Koordination nachhaltiger Verbesserungsmaßnahmen, Automatisierung und Standardisierung, wodurch der Release-Management-Prozess um 30 % beschleunigt wurde</span><span class="l-en">Carried out 10 change and problem management activities and coordinated lasting improvements, automation and standardisation, speeding up the release management process by 30%</span></li>
+        <li data-t="sc pm auto ci"><span class="l-de">Durchführung von 10 Change- und Problem-Management-Aktivitäten inkl. Ursachenanalyse sowie Koordination nachhaltiger Verbesserungsmaßnahmen (KVP), Automatisierung und Standardisierung, wodurch der Release-Management-Prozess um 30 % beschleunigt wurde</span><span class="l-en">Carried out 10 change and problem management activities including root cause analysis, and coordinated lasting improvements, automation and standardisation, speeding up the release management process by 30%</span></li>
         <li data-t="ps bi"><span class="l-de">Erstellung und Pflege von Terminplänen, Projektplänen, Statusübersichten, KPIs und Management-Reportings/Dashboards mit Jira und Power BI</span><span class="l-en">Built and maintained schedules, project plans, status overviews, KPIs and management reports/dashboards in Jira and Power BI</span></li>
         <li data-t="ps"><span class="l-de">Digitalisierung, Strukturierung und Nachverfolgung von Anforderungen, Arbeitspaketen, Abhängigkeiten, Änderungen und Projektaktivitäten mit DevOps und Product Owners für 25+ Teams</span><span class="l-en">Digitised, structured and tracked requirements, work packages, dependencies, changes and project activities with DevOps and Product Owners for 25+ teams</span></li>
         <li data-t="ps sc"><span class="l-de">Koordination und Abstimmung von Aufgaben zwischen 25+ Entwicklungs-, Test-, Qualitäts- und weiteren Projektteams</span><span class="l-en">Coordinated and aligned tasks across 25+ development, test, quality and other project teams</span></li>
@@ -336,16 +339,16 @@ body.filtering ul.b li.hit::before{background:var(--gold)}
       <div class="jh"><h3><span class="l-de">Prozessmanager / Projektmanager</span><span class="l-en">Process Manager / Project Manager</span></h3><span class="date">11/2022 – 12/2024</span></div>
       <div class="org">4ACES-Tech GmbH, Wolfsburg</div>
       <ul class="b">
-        <li data-t="ps pm"><span class="l-de">Leitung und Koordination von 10+ internationalen Software- und Automotive-Projekten für Volkswagen, Porsche und Audi mit der Optimierung von 25+ Prozessen</span><span class="l-en">Led and coordinated 10+ international software and automotive projects for Volkswagen, Porsche and Audi, optimising 25+ processes</span></li>
+        <li data-t="ps pm ci"><span class="l-de">Leitung und Koordination von 10+ internationalen Software- und Automotive-Projekten für Volkswagen, Porsche und Audi mit der Optimierung von 25+ Prozessen</span><span class="l-en">Led and coordinated 10+ international software and automotive projects for Volkswagen, Porsche and Audi, optimising 25+ processes</span></li>
         <li data-t="ps"><span class="l-de">Durchführung der Projektplanung und -steuerung für 10+ Projekte, einschließlich detaillierter Terminpläne bis Level 4/5 in MS Project sowie Ressourcen-, Budget- und Aufgabenplanung</span><span class="l-en">Ran project planning and control for 10+ projects, including detailed level 4/5 schedules in MS Project and resource, budget and task planning</span></li>
         <li data-t="pm ps"><span class="l-de">Strukturierung und Nachverfolgung von Projektaktivitäten, Arbeitspaketen, Konzepten und Modellierungen, wodurch 25+ Prozesse operativ verbessert wurden</span><span class="l-en">Structured and tracked project activities, work packages, concepts and models, improving 25+ processes in operation</span></li>
         <li data-t="risk"><span class="l-de">Analyse von Anforderungen, Risiken und Abhängigkeiten sowie Ableitung geeigneter Maßnahmen</span><span class="l-en">Analysed requirements, risks and dependencies and derived suitable measures</span></li>
         <li data-t="pm"><span class="l-de">Erstellung und Pflege von Strategie-, Prozess- und Projektdokumentationen für 30+ Teams in 10+ Projekten</span><span class="l-en">Wrote and maintained strategy, process and project documentation for 30+ teams across 10+ projects</span></li>
         <li data-t="sc"><span class="l-de">Koordination der Zusammenarbeit zwischen Fachbereichen, Projektmanagement und technischen Entwicklungsteams</span><span class="l-en">Coordinated collaboration between business units, project management and engineering teams</span></li>
-        <li data-t="qa pm"><span class="l-de">Durchführung von Qualitätsmanagement- und Prozessverbesserungsaktivitäten sowie Vorbereitung und Begleitung von GAP-Analysen und Probe-Assessments</span><span class="l-en">Ran quality management and process improvement activities; prepared and supported gap analyses and mock assessments</span></li>
+        <li data-t="qa pm ci"><span class="l-de">Durchführung von Qualitätsmanagement- und kontinuierlichen Prozessverbesserungsaktivitäten sowie Vorbereitung und Begleitung von GAP-Analysen und Probe-Assessments</span><span class="l-en">Ran quality management and continuous process improvement activities; prepared and supported gap analyses and mock assessments</span></li>
         <li data-t="agile ps"><span class="l-de">Anwendung agiler Methoden und Projektmanagement-Tools wie Jira, Codebeamer, MS Project, SharePoint und Cplace</span><span class="l-en">Applied agile methods and PM tools such as Jira, Codebeamer, MS Project, SharePoint and Cplace</span></li>
-        <li data-t="ps risk"><span class="l-de">Ressourcenplanung, Risikoanalyse, Machbarkeitsanalyse sowie Budget- und Terminmanagement für 10+ internationale Projekte, wodurch die Lieferzeit um 18 % verkürzt wurde</span><span class="l-en">Resource planning, risk analysis, feasibility analysis and budget and schedule management for 10+ international projects, cutting delivery time by 18%</span></li>
-        <li data-t="bi ps"><span class="l-de">Führung und Optimierung von Budgetplanung, Kostenkontrolle und Soll-Ist-Vergleichen im Rahmen der Projektsteuerung, wodurch die Produktkosten um 13 % gesenkt wurden</span><span class="l-en">Ran and improved budget planning, cost control and target-vs-actual comparisons in project control, reducing product costs by 13%</span></li>
+        <li data-t="ps risk ci"><span class="l-de">Ressourcenplanung, Risikoanalyse, Machbarkeitsanalyse sowie Budget- und Terminmanagement für 10+ internationale Projekte, wodurch die Lieferzeit um 18 % verkürzt wurde</span><span class="l-en">Resource planning, risk analysis, feasibility analysis and budget and schedule management for 10+ international projects, cutting delivery time by 18%</span></li>
+        <li data-t="bi ps ci"><span class="l-de">Führung und Optimierung von Budgetplanung, Kostenkontrolle und Soll-Ist-Vergleichen im Rahmen der Projektsteuerung, wodurch die Produktkosten um 13 % gesenkt wurden</span><span class="l-en">Ran and improved budget planning, cost control and target-vs-actual comparisons in project control, reducing product costs by 13%</span></li>
       </ul>
     </div>
 
@@ -355,7 +358,7 @@ body.filtering ul.b li.hit::before{background:var(--gold)}
       <ul class="b">
         <li data-t="qa"><span class="l-de">Validierung von Testaktivitäten und Umsetzung der Schritte nach ASPICE und V-Modell</span><span class="l-en">Validated test activities and implemented the required steps according to ASPICE and the V-model</span></li>
         <li data-t="bi qa"><span class="l-de">Monitoring und Reporting des Reifegrades über alle Systeme hinweg mit IBM DOORS, PTC Windchill und Power BI</span><span class="l-en">Monitored and reported maturity across all systems with IBM DOORS, PTC Windchill and Power BI</span></li>
-        <li data-t="pm bi"><span class="l-de">Prozessauswertung und Erarbeitung von Verbesserungsvorschlägen; Entwicklung und Konsolidierung von KPIs sowie PM-Prozessen und Projekt-Reviews</span><span class="l-en">Evaluated processes and proposed improvements; developed and consolidated KPIs, PM processes and project reviews</span></li>
+        <li data-t="pm bi ci"><span class="l-de">Prozessauswertung und Erarbeitung von Verbesserungsvorschlägen; Entwicklung und Konsolidierung von KPIs sowie PM-Prozessen und Projekt-Reviews</span><span class="l-en">Evaluated processes and proposed improvements; developed and consolidated KPIs, PM processes and project reviews</span></li>
       </ul>
     </div>
 
@@ -364,7 +367,7 @@ body.filtering ul.b li.hit::before{background:var(--gold)}
       <div class="org"><span class="l-de">AICT, Alexandria (Ägypten)</span><span class="l-en">AICT, Alexandria (Egypt)</span></div>
       <ul class="b">
         <li data-t="auto"><span class="l-de">Planung der vorbeugenden Wartung von STS-Kränen im Hafen; Verantwortung für Software und Hardware des SPS-Systems sowie Maschinen- und SPS-Programmierung (CoDeSys, Siemens Step 7 / TIA Portal, FUJI, GE)</span><span class="l-en">Planned preventive maintenance of ship-to-shore (STS) cranes in the port; owned PLC software and hardware and programmed machines and PLCs (CoDeSys, Siemens Step 7 / TIA Portal, FUJI, GE)</span></li>
-        <li data-t="qa"><span class="l-de">Fehlersuche, Ursachenanalyse und Behebung schwerer elektrischer Störungen (u. a. Bussysteme, I/O-Module, Hochspannungsantriebe)</span><span class="l-en">Troubleshot, root-caused and fixed major electrical faults (bus systems, I/O modules, high-voltage drives)</span></li>
+        <li data-t="qa ci"><span class="l-de">Fehlersuche, Ursachenanalyse und Behebung schwerer elektrischer Störungen (u. a. Bussysteme, I/O-Module, Hochspannungsantriebe)</span><span class="l-en">Troubleshot, root-caused and fixed major electrical faults (bus systems, I/O modules, high-voltage drives)</span></li>
         <li data-t="auto pm"><span class="l-de">Dokumentation von Alarmen und Automatisierung der Wartungssysteme inklusive Lösungsdokumentation</span><span class="l-en">Documented alarms and automated maintenance systems, including solution documentation</span></li>
       </ul>
     </div>
@@ -400,8 +403,8 @@ body.filtering ul.b li.hit::before{background:var(--gold)}
   <section>
     <h2><span class="l-de">Kernkompetenzen &amp; Tools</span><span class="l-en">Core skills &amp; tools</span></h2>
     <dl class="kk">
-      <dt>Process Excellence</dt>
-      <dd><span class="l-de">Prozessanalyse, -optimierung und -modellierung, Workflow-Design, Prozessdokumentation, Prozess-KPIs, Qualitätsmanagement, Six Sigma, ASPICE, Change Management</span><span class="l-en">Process analysis, optimisation and modelling, workflow design, process documentation, process KPIs, quality management, Six Sigma, ASPICE, change management</span></dd>
+      <dt><span class="l-de">KVP &amp; Operational Excellence</span><span class="l-en">Continuous improvement &amp; OpEx</span></dt>
+      <dd><span class="l-de">Kontinuierlicher Verbesserungsprozess (KVP), Six Sigma (DMAIC), PDCA, Ursachenanalyse, Standardisierung, Prozessanalyse, -optimierung und -modellierung, Workflow-Design, Prozessdokumentation, Prozess-KPIs, Qualitätsmanagement, ASPICE, Change Management</span><span class="l-en">Continuous improvement, Six Sigma (DMAIC), PDCA, root cause analysis, standardisation, process analysis, optimisation and modelling, workflow design, process documentation, process KPIs, quality management, ASPICE, change management</span></dd>
       <dt><span class="l-de">Projektmanagement</span><span class="l-en">Project management</span></dt>
       <dd><span class="l-de">Projektplanung und -steuerung, Termin- und Ressourcenplanung (Level 4/5, MS Project), Risiko- und Änderungsmanagement, Stakeholder-Management, Reporting; V-Modell, Scrum, Kanban, SAFe</span><span class="l-en">Project planning and control, schedule and resource planning (level 4/5, MS Project), risk and change management, stakeholder management, reporting; V-model, Scrum, Kanban, SAFe</span></dd>
       <dt>Business Analysis</dt>
@@ -419,7 +422,7 @@ body.filtering ul.b li.hit::before{background:var(--gold)}
 <script>
 (function(){
   var body=document.body;
-  var NAMES={pm:["Prozessmanagement","Process management"],ps:["Projektsteuerung","Project control"],bi:["BI & KPIs","BI & KPIs"],
+  var NAMES={ci:["KVP & Operational Excellence","Continuous improvement & operational excellence"],pm:["Prozessmanagement","Process management"],ps:["Projektsteuerung","Project control"],bi:["BI & KPIs","BI & KPIs"],
     risk:["Risikomanagement","Risk management"],auto:["Automatisierung","Automation"],qa:["Qualität & ASPICE","Quality & ASPICE"],
     agile:["Agil","Agile"],sc:["Stakeholder & Change","Stakeholders & change"]};
   var items=[].slice.call(document.querySelectorAll("ul.b li[data-t]"));
